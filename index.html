@@ -651,118 +651,379 @@ nav {
 .img-question { font-size: 14px; color: var(--ink-soft); font-weight: 600; }
 
 /* ═══════════════════════════════
-   MOVIES PAGE
+   MOVIES PAGE — NETFLIX STYLE
 ═══════════════════════════════ */
-.movies-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+
+/* The movies screen overrides the default paper background */
+#screen-movies {
+  background: #0a0a0a;
+  max-width: 100%;
+  padding: 0 0 60px;
+  min-height: 100vh;
 }
 
-.movie-card {
-  background: #fff;
-  border: 1.5px solid var(--border);
-  border-radius: 16px;
+/* ── HERO BANNER ── */
+.nx-hero {
+  position: relative;
+  width: 100%;
+  height: 520px;
   overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: all 0.25s;
+  margin-bottom: 0;
 }
 
-.movie-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-
-.movie-thumb {
-  width: 100%; aspect-ratio: 2/3;
-  object-fit: cover;
+.nx-hero-bg {
+  position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 60px;
+  font-size: 140px;
+  filter: blur(2px);
+}
+
+.nx-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,10,10,0.2) 0%,
+    rgba(10,10,10,0.1) 40%,
+    rgba(10,10,10,0.85) 75%,
+    rgba(10,10,10,1) 100%
+  );
+}
+
+.nx-hero-overlay-side {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(10,10,10,0.9) 35%, transparent 70%);
+}
+
+.nx-hero-content {
+  position: absolute;
+  bottom: 60px; left: 60px;
+  max-width: 520px;
+  z-index: 2;
+}
+
+.nx-hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--red);
+  color: #fff;
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.nx-hero-title {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 56px;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 6px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+}
+
+.nx-hero-title-vn {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px; font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 12px;
+}
+
+.nx-hero-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  max-width: 380px;
+}
+
+.nx-hero-actions {
+  display: flex; gap: 12px;
+}
+
+.nx-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 11px 24px;
+  border-radius: 6px;
+  border: none;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.nx-btn-play {
+  background: #fff;
+  color: #000;
+}
+.nx-btn-play:hover { background: rgba(255,255,255,0.85); }
+
+.nx-btn-more {
+  background: rgba(109,109,110,0.7);
+  color: #fff;
+}
+.nx-btn-more:hover { background: rgba(109,109,110,0.5); }
+
+/* ── SEARCH BAR (Netflix style) ── */
+.nx-search-bar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 60px;
+  background: rgba(10,10,10,0.95);
+  position: sticky; top: 61px; z-index: 10;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.nx-search-input {
+  flex: 1; max-width: 320px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 9px 16px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 13px;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.nx-search-input:focus { border-color: #fff; }
+.nx-search-input::placeholder { color: rgba(255,255,255,0.35); }
+
+.nx-filter-chips {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+
+.nx-chip {
+  padding: 6px 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: transparent;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 12px; font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nx-chip:hover { border-color: #fff; color: #fff; }
+.nx-chip.active { background: var(--red); border-color: var(--red); color: #fff; }
+
+/* ── ROW SECTIONS ── */
+.nx-content {
+  padding: 0 60px;
+}
+
+.nx-row {
+  margin-bottom: 40px;
+}
+
+.nx-row-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.nx-row-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px; font-weight: 700;
+  color: #e5e5e5;
+  display: flex; align-items: center; gap: 10px;
+}
+
+.nx-row-title-cn {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 22px;
+  color: rgba(192,57,43,0.7);
+}
+
+.nx-see-all {
+  font-size: 12px; font-weight: 600;
+  color: var(--red-light);
+  cursor: pointer;
+  transition: color 0.2s;
+  border: none; background: none;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.nx-see-all:hover { color: #fff; }
+
+/* ── HORIZONTAL SCROLL TRACK ── */
+.nx-track-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.nx-track {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+.nx-track::-webkit-scrollbar { display: none; }
+
+/* scroll arrows */
+.nx-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 80%;
+  background: rgba(10,10,10,0.7);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: #fff;
+  cursor: pointer;
+  z-index: 5;
+  transition: background 0.2s;
+  border-radius: 4px;
+}
+.nx-arrow:hover { background: rgba(10,10,10,0.95); }
+.nx-arrow-left  { left: 0; }
+.nx-arrow-right { right: 0; }
+
+/* ── MOVIE CARD (Netflix style) ── */
+.nx-card {
+  flex: 0 0 200px;
+  position: relative;
+  border-radius: 6px;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), z-index 0s 0.3s;
+  transform-origin: center center;
+}
+
+.nx-card:hover {
+  transform: scale(1.28);
+  z-index: 50;
+  transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), z-index 0s;
+}
+
+/* push neighbours slightly */
+.nx-card:hover ~ .nx-card { transform: translateX(20px); }
+.nx-track:has(.nx-card:hover) .nx-card:first-child { /* handled by JS */ }
+
+.nx-card-poster {
+  width: 200px; height: 113px; /* 16:9 for YouTube-style */
+  border-radius: 6px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
   position: relative; overflow: hidden;
 }
 
-.movie-poster {
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 12px;
-  padding: 20px;
+.nx-card-poster-emoji {
+  font-size: 44px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
 }
 
-.movie-emoji { font-size: 48px; }
+.nx-card-poster-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+}
 
-.movie-cn-title {
+.nx-card-poster-cn {
+  position: absolute;
+  bottom: 6px; left: 8px;
   font-family: 'Ma Shan Zheng', cursive;
-  font-size: 24px;
-  color: rgba(255,255,255,0.9);
-  text-align: center;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  font-size: 16px;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  z-index: 1;
 }
 
-.movie-play-btn {
-  width: 44px; height: 44px;
-  background: rgba(255,255,255,0.2);
+/* hover info panel */
+.nx-card-info {
+  position: absolute;
+  top: 100%; left: 0; right: 0;
+  background: #181818;
+  border-radius: 0 0 6px 6px;
+  padding: 12px;
+  display: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+}
+
+.nx-card:hover .nx-card-info { display: block; }
+
+.nx-card-info-actions {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 10px;
+}
+
+.nx-ic-btn {
+  width: 30px; height: 30px;
   border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  background: transparent;
+  color: #fff;
+  font-size: 13px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-  border: 2px solid rgba(255,255,255,0.4);
-  transition: all 0.2s;
-}
-
-.movie-card:hover .movie-play-btn {
-  background: var(--red);
-  border-color: var(--red);
-}
-
-.movie-info { padding: 14px 16px; }
-
-.movie-title {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 14px; font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 4px;
   cursor: pointer;
-  transition: color 0.2s;
-  text-decoration: none;
-  display: block;
+  transition: border-color 0.2s;
+}
+.nx-ic-btn:hover { border-color: #fff; }
+.nx-ic-btn.play { background: #fff; color: #000; border-color: #fff; }
+
+.nx-ic-btn.add { font-size: 16px; }
+
+.nx-card-title {
+  font-size: 12px; font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1.3;
 }
 
-.movie-title:hover { color: var(--red); }
-
-.movie-meta {
-  font-size: 11px;
-  color: var(--muted);
-  display: flex; gap: 8px; align-items: center;
-  flex-wrap: wrap;
+.nx-card-meta {
+  display: flex; gap: 6px; align-items: center; flex-wrap: wrap;
 }
 
-.movie-year {
-  background: rgba(192,57,43,0.08);
-  border: 0.5px solid rgba(192,57,43,0.2);
-  border-radius: 4px;
-  padding: 1px 6px;
+.nx-meta-year {
   font-size: 10px;
-  color: var(--red-dark);
+  color: #46d369;
   font-weight: 700;
 }
 
-/* filter tabs */
-.filter-row {
-  display: flex; gap: 8px; flex-wrap: wrap;
-  margin-bottom: 28px;
+.nx-meta-tag {
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  border: 0.5px solid rgba(255,255,255,0.2);
+  padding: 0 4px;
+  border-radius: 2px;
 }
 
-.filter-chip {
-  padding: 6px 16px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: #fff;
-  font-size: 12px; font-weight: 600;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: 'Noto Sans SC', sans-serif;
+/* ── SEARCH RESULTS GRID ── */
+.nx-search-results {
+  display: none;
+  padding: 24px 60px;
 }
 
-.filter-chip:hover { border-color: var(--red); color: var(--red-dark); }
-.filter-chip.active { background: var(--red); color: #fff; border-color: var(--red); }
+.nx-search-results.show { display: block; }
+
+.nx-search-results-title {
+  font-size: 14px; color: rgba(255,255,255,0.5);
+  margin-bottom: 20px;
+}
+
+.nx-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+/* ── EMPTY STATE ── */
+.nx-empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: rgba(255,255,255,0.3);
+}
+.nx-empty-icon { font-size: 48px; margin-bottom: 12px; }
+.nx-empty-text { font-size: 16px; }
+
+@media(max-width:768px){
+  .nx-hero { height: 340px; }
+  .nx-hero-content { left: 24px; bottom: 40px; }
+  .nx-hero-title { font-size: 36px; }
+  .nx-search-bar { padding: 12px 20px; flex-wrap: wrap; }
+  .nx-content { padding: 0 20px; }
+  .nx-search-results { padding: 20px; }
+  .nx-card { flex: 0 0 140px; }
+  .nx-card-poster { width: 140px; height: 79px; }
+  .nx-card:hover { transform: scale(1.15); }
+}
 
 /* ═══════════════════════════════
    EXAM PAGE
@@ -1092,23 +1353,49 @@ nav {
   </div>
 </div>
 
-<!-- ═══ MOVIES ═══ -->
+<!-- ═══ MOVIES — NETFLIX STYLE ═══ -->
 <div class="screen" id="screen-movies">
-  <div class="section-heading">
-    <h2>Phim Trung Quốc</h2>
-    <span class="section-cn-deco">电影</span>
+
+  <!-- HERO BANNER (shows featured content) -->
+  <div class="nx-hero" id="nxHero">
+    <div class="nx-hero-bg" id="nxHeroBg"></div>
+    <div class="nx-hero-overlay"></div>
+    <div class="nx-hero-overlay-side"></div>
+    <div class="nx-hero-content">
+      <div class="nx-hero-badge">▶ NỔI BẬT TUẦN NÀY</div>
+      <div class="nx-hero-title" id="nxHeroTitle">我在故宫修文物</div>
+      <div class="nx-hero-title-vn" id="nxHeroTitleVn">Tôi ở Cố Cung Sửa Cổ Vật</div>
+      <div class="nx-hero-desc" id="nxHeroDesc">Phim tài liệu nổi tiếng về những nghệ nhân phục chế cổ vật tại Cố Cung Bắc Kinh — tuyệt vời để học từ vựng văn hóa.</div>
+      <div class="nx-hero-actions">
+        <a class="nx-btn nx-btn-play" id="nxHeroPlay" href="#" target="_blank">▶ Xem ngay</a>
+        <button class="nx-btn nx-btn-more" onclick="document.getElementById('nxHeroDesc').scrollIntoView()">ℹ Thêm thông tin</button>
+      </div>
+    </div>
   </div>
 
-  <div class="filter-row" id="movieFilter">
-    <button class="filter-chip active" data-genre="all">Tất cả</button>
-    <button class="filter-chip" data-genre="drama">Phim truyền hình</button>
-    <button class="filter-chip" data-genre="historical">Cổ trang</button>
-    <button class="filter-chip" data-genre="modern">Hiện đại</button>
-    <button class="filter-chip" data-genre="movie">Điện ảnh</button>
-    <button class="filter-chip" data-genre="animation">Hoạt hình</button>
+  <!-- SEARCH + FILTER BAR -->
+  <div class="nx-search-bar">
+    <input class="nx-search-input" id="nxSearch" type="text" placeholder="🔍  Tìm kiếm phim..."/>
+    <div class="nx-filter-chips" id="nxChips">
+      <button class="nx-chip active" data-cat="all">Tất cả</button>
+      <button class="nx-chip" data-cat="travel">Du lịch 旅游</button>
+      <button class="nx-chip" data-cat="cartoon">Hoạt hình 动画</button>
+      <button class="nx-chip" data-cat="drama">Phim bộ 电视剧</button>
+      <button class="nx-chip" data-cat="documentary">Tài liệu 纪录片</button>
+      <button class="nx-chip" data-cat="variety">Giải trí 综艺</button>
+      <button class="nx-chip" data-cat="movie">Điện ảnh 电影</button>
+    </div>
   </div>
 
-  <div class="movies-grid" id="moviesGrid"></div>
+  <!-- SEARCH RESULTS (shown when typing) -->
+  <div class="nx-search-results" id="nxSearchResults">
+    <div class="nx-search-results-title" id="nxResultsLabel">Kết quả tìm kiếm</div>
+    <div class="nx-results-grid" id="nxResultsGrid"></div>
+  </div>
+
+  <!-- ROW CONTENT (shown normally) -->
+  <div class="nx-content" id="nxRowsContainer"></div>
+
 </div>
 
 <!-- ═══ EXAM ═══ -->
@@ -1476,68 +1763,386 @@ function openGrammar(level) {
   document.getElementById('modalContent').innerHTML = html;
   document.getElementById('modalOverlay').classList.add('show');
 }
+════════════════════════════════════════════════════════
+   MOVIES DATA — NETFLIX STYLE
+   ────────────────────────────────────────────────────────
+   HOW TO ADD YOUR OWN CONTENT:
+   Each item in MOVIES_DATA has these fields:
+     title     : Chinese title (汉字)
+     titleVn   : Vietnamese / subtitle title
+     year      : Release year (number)
+     cat       : Category — 'travel' | 'cartoon' | 'drama' | 'documentary' | 'variety' | 'movie'
+     bg        : Poster background color (CSS color string)
+     emoji     : Poster emoji (pick something thematic)
+     url       : YouTube link (full URL)
+     desc      : Short description (Vietnamese)
+     tags      : Array of label strings shown on hover
+     featured  : true = show this in the hero banner (only 1 at a time)
 
-/* ════ MOVIES DATA ════ */
-const MOVIES = [
-  {title:'琅琊榜',titleVn:'Lang Nha Bang',year:2015,genre:'historical',bg:'#8B1A1A',emoji:'⚔️',url:'https://www.youtube.com/results?search_query=Lang+Nha+Bang+nianga+ji',desc:'Chính trị cung đình'},
-  {title:'甄嬛传',titleVn:'Hậu Cung Chân Hoàn Truyện',year:2011,genre:'historical',bg:'#6B2737',emoji:'👸',url:'https://www.youtube.com/results?search_query=Zhen+Huan+Zhuan',desc:'Hậu cung tranh đấu'},
-  {title:'延禧攻略',titleVn:'Diên Hi Công Lược',year:2018,genre:'historical',bg:'#2F4F4F',emoji:'🏯',url:'https://www.youtube.com/results?search_query=Yan+Xi+Gong+Lue',desc:'Hậu cung thời Thanh'},
-  {title:'请君',titleVn:'Thỉnh Quân',year:2022,genre:'historical',bg:'#4A235A',emoji:'🌸',url:'https://www.youtube.com/results?search_query=qing+jun+drama+2022',desc:'Cổ trang lãng mạn'},
-  {title:'爱情公寓',titleVn:'Chung Cư Tình Yêu',year:2009,genre:'modern',bg:'#1A3A5C',emoji:'🏘️',url:'https://www.youtube.com/results?search_query=Ipartment+Chinese+drama',desc:'Sitcom hiện đại'},
-  {title:'都挺好',titleVn:'Đều Rất Tốt',year:2019,genre:'modern',bg:'#1A4A2E',emoji:'👨‍👩‍👧',url:'https://www.youtube.com/results?search_query=du+ting+hao+drama',desc:'Phim gia đình'},
-  {title:'三十而已',titleVn:'Ba Mươi Chỉ Thế Thôi',year:2020,genre:'modern',bg:'#3D1A4A',emoji:'👩',url:'https://www.youtube.com/results?search_query=Nothing+But+Thirty+drama',desc:'Phụ nữ 30 tuổi'},
-  {title:'功夫',titleVn:'Kung Fu Hustle',year:2004,genre:'movie',bg:'#7A3B1E',emoji:'🥋',url:'https://www.youtube.com/results?search_query=Kung+Fu+Hustle+2004',desc:'Phim hài võ thuật'},
-  {title:'英雄',titleVn:'Anh Hùng',year:2002,genre:'movie',bg:'#1A1A4A',emoji:'🗡️',url:'https://www.youtube.com/results?search_query=Hero+2002+Zhang+Yimou',desc:'Kinh điển wuxia'},
-  {title:'卧虎藏龙',titleVn:'Ngọa Hổ Tàng Long',year:2000,genre:'movie',bg:'#1E3A2F',emoji:'🐉',url:'https://www.youtube.com/results?search_query=Crouching+Tiger+Hidden+Dragon',desc:'Phim Oscar'},
-  {title:'哪吒之魔童降世',titleVn:'Né Tra: Ma Đồng Giáng Thế',year:2019,genre:'animation',bg:'#0A1A3A',emoji:'🔥',url:'https://www.youtube.com/results?search_query=Ne+Zha+2019+animation',desc:'Hoạt hình thần thoại'},
-  {title:'大鱼海棠',titleVn:'Cá Lớn Hải Đường',year:2016,genre:'animation',bg:'#1A2A3A',emoji:'🐟',url:'https://www.youtube.com/results?search_query=Big+Fish+Begonia+2016',desc:'Hoạt hình nghệ thuật'},
-  {title:'白蛇：缘起',titleVn:'Bạch Xà: Duyên Khởi',year:2019,genre:'animation',bg:'#1A3A2A',emoji:'🐍',url:'https://www.youtube.com/results?search_query=White+Snake+2019+animation',desc:'Bạch Xà truyền thuyết'},
-  {title:'古相思曲',titleVn:'Khúc Tương Tư Cổ',year:2021,genre:'drama',bg:'#3A1A1A',emoji:'🎻',url:'https://www.youtube.com/results?search_query=gu+xiang+si+qu+drama',desc:'Phim âm nhạc cổ đại'},
-  {title:'知否知否',titleVn:'Hữu Phỉ',year:2019,genre:'historical',bg:'#4A2A1A',emoji:'🌺',url:'https://www.youtube.com/results?search_query=Ming+Lan+Story+drama',desc:'Gia đình thời Tống'},
-  {title:'陈情令',titleVn:'Trần Tình Lệnh',year:2019,genre:'historical',bg:'#1A1A2A',emoji:'⚡',url:'https://www.youtube.com/results?search_query=The+Untamed+2019',desc:'Tiên hiệp huyền huyễn'},
+   TO ADD A NEW VIDEO: copy one block, change the fields, paste inside MOVIES_DATA = [ ... ]
+   TO CHANGE CATEGORIES: update the cat field to match one of the nx-chip data-cat values above
+════════════════════════════════════════════════════════ */
+const MOVIES_DATA = [
+
+  /* ── DU LỊCH (Travel) ── */
+  {
+    title:'我去云南', titleVn:'Tôi đến Vân Nam',
+    year:2023, cat:'travel', bg:'linear-gradient(135deg,#1a6b3c,#0d4a2a)',
+    emoji:'🏔️', url:'https://www.youtube.com/results?search_query=云南旅游+vlog+中文',
+    desc:'Khám phá Vân Nam — thiên nhiên tuyệt đẹp và văn hóa đa dạng của miền Tây Nam Trung Quốc.',
+    tags:['Du lịch','Vân Nam','HSK 3+']
+  },
+  {
+    title:'西藏之旅', titleVn:'Hành trình Tây Tạng',
+    year:2022, cat:'travel', bg:'linear-gradient(135deg,#1a3a6b,#0d2a4a)',
+    emoji:'🏯', url:'https://www.youtube.com/results?search_query=西藏旅游+中文+vlog',
+    desc:'Hành trình khám phá vùng đất thiêng liêng Tây Tạng qua góc nhìn của người địa phương.',
+    tags:['Du lịch','Tây Tạng','Văn hóa']
+  },
+  {
+    title:'去桂林看山水', titleVn:'Phong cảnh Quế Lâm',
+    year:2023, cat:'travel', bg:'linear-gradient(135deg,#2d6b1a,#1a4a0d)',
+    emoji:'⛰️', url:'https://www.youtube.com/results?search_query=桂林山水+旅游+vlog',
+    desc:'Phong cảnh núi non và dòng sông huyền ảo của Quế Lâm — một trong những cảnh đẹp nhất Trung Quốc.',
+    tags:['Du lịch','Quế Lâm','Thiên nhiên']
+  },
+  {
+    title:'上海一日游', titleVn:'Một ngày ở Thượng Hải',
+    year:2023, cat:'travel', bg:'linear-gradient(135deg,#3a1a6b,#2a0d4a)',
+    emoji:'🌃', url:'https://www.youtube.com/results?search_query=上海一日游+中文vlog',
+    desc:'Khám phá Thượng Hải hiện đại — từ Ngoại Than đến những con phố cổ.',
+    tags:['Du lịch','Thượng Hải','Đô thị']
+  },
+  {
+    title:'北京故宫游', titleVn:'Tham quan Cố Cung Bắc Kinh',
+    year:2022, cat:'travel', bg:'linear-gradient(135deg,#8B1A1A,#5a0a0a)',
+    emoji:'🏛️', url:'https://www.youtube.com/results?search_query=北京故宫+参观+中文',
+    desc:'Tour tham quan Tử Cấm Thành — nơi lưu giữ lịch sử ngàn năm của triều đại phong kiến Trung Hoa.',
+    tags:['Du lịch','Bắc Kinh','Lịch sử'], featured: true
+  },
+  {
+    title:'成都美食之旅', titleVn:'Ẩm thực Thành Đô',
+    year:2023, cat:'travel', bg:'linear-gradient(135deg,#6b3a1a,#4a2a0d)',
+    emoji:'🌶️', url:'https://www.youtube.com/results?search_query=成都美食+中文vlog',
+    desc:'Khám phá ẩm thực cay nồng Tứ Xuyên và văn hóa trà đạo Thành Đô.',
+    tags:['Du lịch','Thành Đô','Ẩm thực']
+  },
+  {
+    title:'丽江古城漫步', titleVn:'Dạo phố cổ Lệ Giang',
+    year:2022, cat:'travel', bg:'linear-gradient(135deg,#4a1a6b,#2a0d4a)',
+    emoji:'🌸', url:'https://www.youtube.com/results?search_query=丽江古城+旅游+中文',
+    desc:'Phố cổ Lệ Giang thơ mộng với kiến trúc Naxi và những dòng kênh xanh trong.',
+    tags:['Du lịch','Lệ Giang','Cổ trấn']
+  },
+
+  /* ── HOẠT HÌNH (Cartoon) ── */
+  {
+    title:'哪吒之魔童降世', titleVn:'Né Tra: Ma Đồng Giáng Thế',
+    year:2019, cat:'cartoon', bg:'linear-gradient(135deg,#0a1a4a,#050d25)',
+    emoji:'🔥', url:'https://www.youtube.com/results?search_query=哪吒之魔童降世+full+movie',
+    desc:'Phim hoạt hình thần thoại Trung Quốc phá kỷ lục phòng vé. Tuyệt vời cho học từ vựng cổ đại.',
+    tags:['Hoạt hình','Thần thoại','HSK 3+']
+  },
+  {
+    title:'大鱼海棠', titleVn:'Cá Lớn Hải Đường',
+    year:2016, cat:'cartoon', bg:'linear-gradient(135deg,#0a2a4a,#051525)',
+    emoji:'🐟', url:'https://www.youtube.com/results?search_query=大鱼海棠+full+movie',
+    desc:'Phim hoạt hình nghệ thuật đẹp như tranh vẽ về tình yêu và hy sinh trong thế giới thần linh.',
+    tags:['Hoạt hình','Nghệ thuật','Lãng mạn']
+  },
+  {
+    title:'白蛇：缘起', titleVn:'Bạch Xà: Duyên Khởi',
+    year:2019, cat:'cartoon', bg:'linear-gradient(135deg,#1a4a1a,#0a250a)',
+    emoji:'🐍', url:'https://www.youtube.com/results?search_query=白蛇缘起+full+movie',
+    desc:'Câu chuyện tình yêu huyền bí giữa Bạch Xà và chàng thợ săn trong thời cổ đại.',
+    tags:['Hoạt hình','Cổ trang','Tình cảm']
+  },
+  {
+    title:'雄狮少年', titleVn:'Chàng Trai Lân Sư Rồng',
+    year:2021, cat:'cartoon', bg:'linear-gradient(135deg,#4a2a0a,#251505)',
+    emoji:'🦁', url:'https://www.youtube.com/results?search_query=雄狮少年+full+movie',
+    desc:'Phim hoạt hình về nghệ thuật múa lân truyền thống — cảm động và đầy cảm hứng.',
+    tags:['Hoạt hình','Văn hóa','Thể thao']
+  },
+  {
+    title:'熊出没', titleVn:'Gấu Xuất Hiện (Boonie Bears)',
+    year:2014, cat:'cartoon', bg:'linear-gradient(135deg,#1a4a2a,#0a2515)',
+    emoji:'🐻', url:'https://www.youtube.com/results?search_query=熊出没+中文+episodes',
+    desc:'Loạt phim hoạt hình nổi tiếng nhất Trung Quốc — phù hợp cho người học HSK 1-2.',
+    tags:['Hoạt hình','Thiếu nhi','HSK 1-2']
+  },
+  {
+    title:'喜羊羊与灰太狼', titleVn:'Tốt Thái Lang vs Hỷ Dương Dương',
+    year:2009, cat:'cartoon', bg:'linear-gradient(135deg,#3a4a1a,#1a250a)',
+    emoji:'🐑', url:'https://www.youtube.com/results?search_query=喜羊羊与灰太狼+中文+episodes',
+    desc:'Series hoạt hình kinh điển — ngôn ngữ đơn giản, tốc độ chậm, rất tốt cho người mới học.',
+    tags:['Hoạt hình','HSK 1','Thiếu nhi']
+  },
+
+  /* ── PHIM BỘ (Drama) ── */
+  {
+    title:'延禧攻略', titleVn:'Diên Hi Công Lược',
+    year:2018, cat:'drama', bg:'linear-gradient(135deg,#2a1a3a,#150a1f)',
+    emoji:'👸', url:'https://www.youtube.com/results?search_query=延禧攻略+full+episodes',
+    desc:'Phim cổ trang nổi tiếng về hậu cung thời Càn Long — từ vựng lịch sử và văn hóa phong phú.',
+    tags:['Phim bộ','Cổ trang','HSK 4+']
+  },
+  {
+    title:'陈情令', titleVn:'Trần Tình Lệnh',
+    year:2019, cat:'drama', bg:'linear-gradient(135deg,#0a0a2a,#050515)',
+    emoji:'⚡', url:'https://www.youtube.com/results?search_query=陈情令+full+episodes',
+    desc:'Phim tiên hiệp huyễn hảo được yêu thích toàn cầu — kho từ vựng tiên hiệp phong phú.',
+    tags:['Phim bộ','Tiên hiệp','HSK 4+']
+  },
+  {
+    title:'都挺好', titleVn:'Đều Rất Tốt',
+    year:2019, cat:'drama', bg:'linear-gradient(135deg,#1a3a1a,#0a1f0a)',
+    emoji:'👨‍👩‍👧', url:'https://www.youtube.com/results?search_query=都挺好+full+drama',
+    desc:'Phim gia đình hiện đại — ngôn ngữ đời thường, rất hữu ích để học hội thoại tự nhiên.',
+    tags:['Phim bộ','Hiện đại','HSK 3+']
+  },
+  {
+    title:'三十而已', titleVn:'Ba Mươi Chỉ Thế Thôi',
+    year:2020, cat:'drama', bg:'linear-gradient(135deg,#3a1a3a,#1f0a1f)',
+    emoji:'👩', url:'https://www.youtube.com/results?search_query=三十而已+full+drama',
+    desc:'Phim về phụ nữ hiện đại ở tuổi 30 — ngôn ngữ tự nhiên và đời thường.',
+    tags:['Phim bộ','Hiện đại','Nữ quyền']
+  },
+
+  /* ── TÀI LIỆU (Documentary) ── */
+  {
+    title:'我在故宫修文物', titleVn:'Tôi ở Cố Cung Sửa Cổ Vật',
+    year:2016, cat:'documentary', bg:'linear-gradient(135deg,#3a2a0a,#1f1505)',
+    emoji:'🏺', url:'https://www.youtube.com/results?search_query=我在故宫修文物+documentary',
+    desc:'Phim tài liệu đặc sắc về những nghệ nhân phục chế cổ vật quý hiếm tại Cố Cung Bắc Kinh.',
+    tags:['Tài liệu','Văn hóa','Lịch sử']
+  },
+  {
+    title:'舌尖上的中国', titleVn:'Đầu Lưỡi Trung Hoa',
+    year:2012, cat:'documentary', bg:'linear-gradient(135deg,#3a1a0a,#1f0a05)',
+    emoji:'🍜', url:'https://www.youtube.com/results?search_query=舌尖上的中国+documentary',
+    desc:'Series tài liệu ẩm thực nổi tiếng nhất Trung Quốc — học từ vựng ẩm thực cực hiệu quả.',
+    tags:['Tài liệu','Ẩm thực','HSK 3+']
+  },
+  {
+    title:'航拍中国', titleVn:'Trung Quốc Nhìn Từ Trên Cao',
+    year:2017, cat:'documentary', bg:'linear-gradient(135deg,#0a2a3a,#05151f)',
+    emoji:'🛩️', url:'https://www.youtube.com/results?search_query=航拍中国+documentary',
+    desc:'Phim tài liệu flycam mãn nhãn về khắp mọi miền đất nước Trung Quốc.',
+    tags:['Tài liệu','Thiên nhiên','Địa lý']
+  },
+  {
+    title:'人生一串', titleVn:'Xiên Nướng Cuộc Đời',
+    year:2018, cat:'documentary', bg:'linear-gradient(135deg,#3a1a0a,#1f0a00)',
+    emoji:'🍢', url:'https://www.youtube.com/results?search_query=人生一串+documentary',
+    desc:'Phim tài liệu về văn hóa ẩm thực đường phố — đặc biệt là các món xiên nướng.',
+    tags:['Tài liệu','Ẩm thực','Đường phố']
+  },
+
+  /* ── GIẢI TRÍ (Variety) ── */
+  {
+    title:'向往的生活', titleVn:'Cuộc Sống Mơ Ước',
+    year:2017, cat:'variety', bg:'linear-gradient(135deg,#1a3a2a,#0a1f15)',
+    emoji:'🌾', url:'https://www.youtube.com/results?search_query=向往的生活+variety+show',
+    desc:'Show thực tế về cuộc sống nông thôn giản dị — ngôn ngữ tự nhiên, dễ nghe.',
+    tags:['Giải trí','Thực tế','HSK 2+']
+  },
+  {
+    title:'中国诗词大会', titleVn:'Đại Hội Thơ Ca Trung Quốc',
+    year:2016, cat:'variety', bg:'linear-gradient(135deg,#2a1a3a,#150a1f)',
+    emoji:'📜', url:'https://www.youtube.com/results?search_query=中国诗词大会+show',
+    desc:'Gameshow văn học về thơ ca cổ điển Trung Quốc — học thành ngữ và thơ cổ.',
+    tags:['Giải trí','Văn học','HSK 5+']
+  },
+  {
+    title:'乘风破浪的姐姐', titleVn:'Chị Đẹp Đạp Gió Rẽ Sóng',
+    year:2020, cat:'variety', bg:'linear-gradient(135deg,#3a0a1a,#1f050d)',
+    emoji:'💃', url:'https://www.youtube.com/results?search_query=乘风破浪的姐姐+show',
+    desc:'Show thực tế âm nhạc nổi tiếng — học từ vựng về âm nhạc và giải trí.',
+    tags:['Giải trí','Âm nhạc','Nữ quyền']
+  },
+
+  /* ── ĐIỆN ẢNH (Movie) ── */
+  {
+    title:'英雄', titleVn:'Anh Hùng',
+    year:2002, cat:'movie', bg:'linear-gradient(135deg,#0a0a2a,#050510)',
+    emoji:'🗡️', url:'https://www.youtube.com/results?search_query=Hero+2002+Zhang+Yimou+full',
+    desc:'Kiệt tác điện ảnh của Trương Nghệ Mưu — ngôn ngữ cổ điển, hình ảnh đẹp.',
+    tags:['Điện ảnh','Cổ trang','Oscar']
+  },
+  {
+    title:'卧虎藏龙', titleVn:'Ngọa Hổ Tàng Long',
+    year:2000, cat:'movie', bg:'linear-gradient(135deg,#1a2a0a,#0a1505)',
+    emoji:'🐉', url:'https://www.youtube.com/results?search_query=Crouching+Tiger+Hidden+Dragon+full',
+    desc:'Phim võ thuật kinh điển đoạt giải Oscar — từ vựng võ thuật và cổ đại.',
+    tags:['Điện ảnh','Võ thuật','Oscar']
+  },
+  {
+    title:'唐人街探案', titleVn:'Thám Tử Phố Tàu',
+    year:2015, cat:'movie', bg:'linear-gradient(135deg,#2a1a0a,#150d05)',
+    emoji:'🔍', url:'https://www.youtube.com/results?search_query=唐人街探案+full+movie',
+    desc:'Phim hài hành động vui nhộn — ngôn ngữ hiện đại, dễ nghe.',
+    tags:['Điện ảnh','Hài','Hành động']
+  },
+  {
+    title:'功夫', titleVn:'Kung Fu Hustle',
+    year:2004, cat:'movie', bg:'linear-gradient(135deg,#2a0a0a,#150505)',
+    emoji:'🥋', url:'https://www.youtube.com/results?search_query=Kung+Fu+Hustle+2004+full',
+    desc:'Phim hài võ thuật kinh điển của Châu Tinh Trì — cực kỳ vui nhộn.',
+    tags:['Điện ảnh','Hài','Võ thuật']
+  },
 ];
 
-let movieGenre = 'all';
+/* ════════════════════════════════════════════════════════
+   ROWS CONFIG — Define which rows appear on the page
+   Each row picks cards by category (cat) or custom filter
+════════════════════════════════════════════════════════ */
+const ROWS_CONFIG = [
+  { title:'🔥 Nổi bật hôm nay',    cn:'今日精选',  cat:'all',         limit:8  },
+  { title:'✈️ Du lịch Trung Quốc', cn:'旅游中国',  cat:'travel',      limit:10 },
+  { title:'🐼 Hoạt hình Trung Quốc',cn:'动画片',  cat:'cartoon',     limit:8  },
+  { title:'📺 Phim bộ hay',         cn:'热播剧',   cat:'drama',       limit:8  },
+  { title:'🎬 Phim tài liệu',       cn:'纪录片',   cat:'documentary', limit:8  },
+  { title:'🎉 Chương trình giải trí',cn:'综艺节目', cat:'variety',     limit:6  },
+  { title:'🏆 Điện ảnh kinh điển',  cn:'经典电影',  cat:'movie',       limit:6  },
+];
 
-function renderMovies() {
-  const grid = document.getElementById('moviesGrid');
-  const list = movieGenre === 'all' ? MOVIES : MOVIES.filter(m => m.genre === movieGenre);
-  grid.innerHTML = list.map(m => `
-    <div class="movie-card">
-      <div class="movie-thumb" style="background:${m.bg};">
-        <div class="movie-poster">
-          <span class="movie-emoji">${m.emoji}</span>
-          <div class="movie-cn-title">${m.title}</div>
-          <div class="movie-play-btn">▶</div>
-        </div>
-      </div>
-      <div class="movie-info">
-        <a class="movie-title" href="${m.url}" target="_blank" rel="noopener">${m.titleVn}</a>
-        <div class="movie-meta">
-          <span class="movie-year">${m.year}</span>
-          <span>${m.desc}</span>
-        </div>
-      </div>
-    </div>`).join('');
+/* ════ BUILD NETFLIX UI ════ */
 
-  // also make poster clickable
-  grid.querySelectorAll('.movie-thumb').forEach((el, i) => {
-    const movieList = movieGenre === 'all' ? MOVIES : MOVIES.filter(m => m.genre === movieGenre);
-    el.style.cursor = 'pointer';
-    el.addEventListener('click', () => window.open(movieList[i].url, '_blank'));
+/* Set hero to featured item */
+const featuredItem = MOVIES_DATA.find(m => m.featured) || MOVIES_DATA[0];
+document.getElementById('nxHeroBg').textContent = featuredItem.emoji;
+document.getElementById('nxHeroBg').style.background = featuredItem.bg;
+document.getElementById('nxHeroTitle').textContent = featuredItem.title;
+document.getElementById('nxHeroTitleVn').textContent = featuredItem.titleVn;
+document.getElementById('nxHeroDesc').textContent = featuredItem.desc;
+document.getElementById('nxHeroPlay').href = featuredItem.url;
+
+/* Build a single card element */
+function buildNxCard(item) {
+  const card = document.createElement('div');
+  card.className = 'nx-card';
+  card.innerHTML = `
+    <div class="nx-card-poster" style="background:${item.bg}">
+      <span class="nx-card-poster-emoji">${item.emoji}</span>
+      <div class="nx-card-poster-overlay"></div>
+      <span class="nx-card-poster-cn">${item.title}</span>
+    </div>
+    <div class="nx-card-info">
+      <div class="nx-card-info-actions">
+        <a class="nx-ic-btn play" href="${item.url}" target="_blank" rel="noopener" title="Xem ngay">▶</a>
+        <button class="nx-ic-btn add" title="Thêm vào danh sách">＋</button>
+        <button class="nx-ic-btn" title="Yêu thích">♡</button>
+      </div>
+      <div class="nx-card-title">${item.titleVn}</div>
+      <div class="nx-card-meta">
+        <span class="nx-meta-year">${item.year}</span>
+        ${(item.tags||[]).map(t=>`<span class="nx-meta-tag">${t}</span>`).join('')}
+      </div>
+    </div>`;
+
+  /* Clicking poster or card (not info buttons) → open YouTube */
+  card.querySelector('.nx-card-poster').addEventListener('click', () => {
+    window.open(item.url, '_blank');
+  });
+
+  return card;
+}
+
+/* Build rows */
+function buildRows(filterCat) {
+  const container = document.getElementById('nxRowsContainer');
+  container.innerHTML = '';
+
+  const rowsToBuild = filterCat === 'all'
+    ? ROWS_CONFIG
+    : [{ title: '🎬 Kết quả lọc', cn:'筛选结果', cat: filterCat, limit: 30 }];
+
+  rowsToBuild.forEach(row => {
+    const items = MOVIES_DATA.filter(m => row.cat === 'all' || m.cat === row.cat).slice(0, row.limit);
+    if (!items.length) return;
+
+    const rowEl = document.createElement('div');
+    rowEl.className = 'nx-row';
+    rowEl.innerHTML = `
+      <div class="nx-row-header">
+        <div class="nx-row-title">
+          ${row.title}
+          <span class="nx-row-title-cn">${row.cn}</span>
+        </div>
+        <button class="nx-see-all">Xem tất cả ›</button>
+      </div>
+      <div class="nx-track-wrap">
+        <button class="nx-arrow nx-arrow-left" onclick="scrollRow(this,-1)">‹</button>
+        <div class="nx-track" id="track-${row.cat}-${Math.random().toString(36).slice(2,6)}"></div>
+        <button class="nx-arrow nx-arrow-right" onclick="scrollRow(this,1)">›</button>
+      </div>`;
+
+    const track = rowEl.querySelector('.nx-track');
+    items.forEach(item => track.appendChild(buildNxCard(item)));
+    container.appendChild(rowEl);
   });
 }
 
-document.querySelectorAll('.filter-chip').forEach(chip => {
+function scrollRow(btn, dir) {
+  const track = btn.parentElement.querySelector('.nx-track');
+  track.scrollBy({ left: dir * 640, behavior: 'smooth' });
+}
+
+buildRows('all');
+
+/* ── FILTER CHIPS ── */
+let currentCat = 'all';
+document.querySelectorAll('.nx-chip').forEach(chip => {
   chip.addEventListener('click', () => {
-    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.nx-chip').forEach(c => c.classList.remove('active'));
     chip.classList.add('active');
-    movieGenre = chip.dataset.genre;
-    renderMovies();
+    currentCat = chip.dataset.cat;
+    document.getElementById('nxSearch').value = '';
+    document.getElementById('nxSearchResults').classList.remove('show');
+    buildRows(currentCat);
   });
 });
 
-renderMovies();
+/* ── SEARCH ── */
+document.getElementById('nxSearch').addEventListener('input', function() {
+  const q = this.value.trim().toLowerCase();
+  const searchEl = document.getElementById('nxSearchResults');
+  const rowsEl = document.getElementById('nxRowsContainer');
+
+  if (!q) {
+    searchEl.classList.remove('show');
+    rowsEl.style.display = '';
+    return;
+  }
+
+  const results = MOVIES_DATA.filter(m =>
+    m.title.toLowerCase().includes(q) ||
+    m.titleVn.toLowerCase().includes(q) ||
+    m.desc.toLowerCase().includes(q) ||
+    (m.tags||[]).some(t => t.toLowerCase().includes(q))
+  );
+
+  rowsEl.style.display = 'none';
+  searchEl.classList.add('show');
+  document.getElementById('nxResultsLabel').textContent =
+    `Tìm thấy ${results.length} kết quả cho "${this.value}"`;
+
+  const grid = document.getElementById('nxResultsGrid');
+  grid.innerHTML = '';
+
+  if (!results.length) {
+    grid.innerHTML = `<div class="nx-empty"><div class="nx-empty-icon">🔍</div><div class="nx-empty-text">Không tìm thấy nội dung phù hợp</div></div>`;
+    return;
+  }
+
+  results.forEach(item => {
+    const card = buildNxCard(item);
+    card.style.flex = 'none';
+    card.style.width = '200px';
+    grid.appendChild(card);
+  });
+});
 
 /* ════ EXAM DATA ════ */
 const EXAM_LEVELS = [
