@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>漢語學習 — Học Tiếng Trung</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Ma+Shan+Zheng&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #c0392b;
+  --red-dark: #96281b;
+  --red-deep: #6e1a11;
+  --red-light: #e74c3c;
+  --gold: #d4a017;
+  --gold-light: #f0c040;
+  --gold-pale: #fdf3d0;
+  --ink: #1a0a05;
+  --ink-soft: #2d1209;
+  --paper: #fdf6e3;
+  --paper2: #faf0d7;
+  --cream: #f8edcf;
+  --muted: #8b5e3c;
+  --border: rgba(212,160,23,0.3);
+  --shadow: 0 4px 24px rgba(96,26,17,0.15);
+  --shadow-lg: 0 8px 48px rgba(96,26,17,0.25);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── PATTERN BG ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(192,57,43,0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(212,160,23,0.06) 0%, transparent 40%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c0392b' fill-opacity='0.03'%3E%3Cpath d='M30 0L60 30L30 60L0 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.app { position: relative; z-index: 1; }
+
+/* ── NAV ── */
+nav {
+  background: linear-gradient(135deg, var(--red-deep) 0%, var(--red-dark) 50%, var(--red) 100%);
+  border-bottom: 3px solid var(--gold);
+  padding: 0;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 4px 20px rgba(96,26,17,0.4);
+}
+
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center;
+  padding: 0 24px;
+  gap: 0;
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 24px 16px 0;
+  border-right: 1px solid rgba(212,160,23,0.3);
+  margin-right: 8px;
+  text-decoration: none;
+}
+
+.logo-char {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 32px;
+  color: var(--gold-light);
+  text-shadow: 0 0 20px rgba(240,192,64,0.5);
+  line-height: 1;
+}
+
+.logo-text {
+  display: flex; flex-direction: column;
+}
+
+.logo-cn {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 3px;
+  line-height: 1;
+}
+
+.logo-vn {
+  font-size: 10px;
+  color: rgba(240,192,64,0.6);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.nav-tabs {
+  display: flex; flex: 1; gap: 0;
+}
+
+.nav-tab {
+  display: flex; align-items: center; gap: 8px;
+  padding: 20px 24px;
+  font-size: 13px; font-weight: 500;
+  color: rgba(240,192,64,0.7);
+  cursor: pointer;
+  border: none; background: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -3px;
+  transition: all 0.25s;
+  letter-spacing: 0.5px;
+  font-family: 'Noto Sans SC', sans-serif;
+  position: relative;
+}
+
+.nav-tab::after {
+  content: '';
+  position: absolute; bottom: -3px; left: 0; right: 0;
+  height: 3px; background: var(--gold-light);
+  transform: scaleX(0);
+  transition: transform 0.25s;
+}
+
+.nav-tab:hover { color: var(--gold-light); }
+.nav-tab.active { color: var(--gold-light); font-weight: 700; }
+.nav-tab.active::after { transform: scaleX(1); }
+
+.tab-icon { font-size: 16px; }
+
+/* ── HERO BANNER ── */
+.page-hero {
+  background: linear-gradient(135deg, var(--red-deep) 0%, var(--red-dark) 60%, #7b1c10 100%);
+  padding: 40px 24px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+
+.page-hero::before {
+  content: '龍鳳呈祥';
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 120px;
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(212,160,23,0.06);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 20px;
+}
+
+.page-hero-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 900;
+  color: var(--gold-light);
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+.page-hero-sub {
+  font-size: 14px;
+  color: rgba(240,192,64,0.6);
+  letter-spacing: 1px;
+}
+
+/* ── SCREENS ── */
+.screen { display: none; max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+.screen.active { display: block; animation: fadeIn 0.4s ease; }
+@keyframes fadeIn { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform: translateY(0); } }
+
+/* ═══════════════════════════════
+   HOME — DICTIONARY
+═══════════════════════════════ */
+.dict-hero {
+  text-align: center;
+  padding: 48px 0 36px;
+  position: relative;
+}
+
+.dict-deco {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 80px;
+  color: rgba(192,57,43,0.08);
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  letter-spacing: 20px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.dict-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: clamp(28px,4vw,48px);
+  font-weight: 900;
+  color: var(--red-dark);
+  margin-bottom: 8px;
+  letter-spacing: 4px;
+  position: relative;
+}
+
+.dict-title em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.dict-subtitle {
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  position: relative;
+}
+
+/* lang toggle */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 28px auto;
+  background: var(--paper2);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 4px;
+  width: fit-content;
+  box-shadow: var(--shadow);
+}
+
+.lang-btn {
+  padding: 8px 22px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lang-btn.active {
+  background: var(--red);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(192,57,43,0.35);
+}
+
+/* search box */
+.search-box-wrap {
+  max-width: 640px;
+  margin: 0 auto 16px;
+  position: relative;
+}
+
+.search-box {
+  width: 100%;
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 60px 18px 24px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 18px;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow);
+}
+
+.search-box:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 4px rgba(192,57,43,0.12);
+}
+
+.search-box::placeholder { color: #c5a882; }
+
+.search-btn {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px;
+  background: var(--red);
+  border: none; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(192,57,43,0.4);
+}
+.search-btn:hover { background: var(--red-dark); transform: translateY(-50%) scale(1.05); }
+
+/* dict result */
+.dict-result {
+  max-width: 640px;
+  margin: 0 auto 40px;
+  display: none;
+}
+
+.dict-result.show { display: block; animation: fadeIn 0.3s ease; }
+
+.result-card {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 28px 32px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.result-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--red), var(--gold));
+}
+
+.result-hanzi {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 72px;
+  color: var(--red-dark);
+  line-height: 1;
+  margin-bottom: 4px;
+  text-shadow: 2px 2px 8px rgba(192,57,43,0.15);
+}
+
+.result-pinyin {
+  font-size: 20px;
+  color: var(--red);
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+
+.result-divider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin: 16px 0;
+}
+
+.result-row {
+  display: flex; align-items: baseline; gap: 12px;
+  margin-bottom: 10px;
+}
+
+.result-lang {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold); min-width: 36px;
+  font-family: 'Cinzel', serif;
+}
+
+.result-meaning {
+  font-size: 16px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.result-tags {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px;
+}
+
+.result-tag {
+  background: rgba(192,57,43,0.08);
+  border: 0.5px solid rgba(192,57,43,0.2);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  color: var(--red-dark);
+  font-weight: 600;
+}
+
+/* quick words */
+.quick-words {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.quick-label {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.quick-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.quick-chip {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(96,26,17,0.06);
+}
+
+.quick-chip:hover {
+  border-color: var(--red);
+  box-shadow: 0 4px 16px rgba(192,57,43,0.15);
+  transform: translateY(-2px);
+}
+
+.quick-cn {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 22px;
+  color: var(--red-dark);
+  line-height: 1.2;
+}
+
+.quick-py {
+  font-size: 11px; color: var(--red); font-weight: 600;
+  margin-top: 2px;
+}
+
+.quick-vn {
+  font-size: 11px; color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ═══════════════════════════════
+   LEVELS PAGE
+═══════════════════════════════ */
+.levels-intro {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.hsk-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--red-deep), var(--red));
+  color: var(--gold-light);
+  border-radius: 999px;
+  padding: 6px 20px;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.1em;
+  box-shadow: 0 4px 16px rgba(192,57,43,0.3);
+  margin-bottom: 16px;
+}
+
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.level-card {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.25s;
+  cursor: pointer;
+}
+
+.level-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+.level-header {
+  padding: 24px;
+  position: relative; overflow: hidden;
+}
+
+.level-header::before {
+  content: attr(data-char);
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 80px;
+  position: absolute; right: 16px; top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,0.12);
+  line-height: 1;
+}
+
+.level-num {
+  font-family: 'Cinzel', serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 4px;
+}
+
+.level-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px; font-weight: 900;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.level-words {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 6px;
+}
+
+.lv1 .level-header { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+.lv2 .level-header { background: linear-gradient(135deg, #d35400, #a04000); }
+.lv3 .level-header { background: linear-gradient(135deg, #c0392b, #922b21); }
+.lv4 .level-header { background: linear-gradient(135deg, #922b21, #641e16); }
+.lv5 .level-header { background: linear-gradient(135deg, #7b241c, #512e5f); }
+.lv6 .level-header { background: linear-gradient(135deg, #2e4057, #1a252f); }
+
+.level-body { padding: 20px 24px; }
+
+.level-features {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 16px;
+}
+
+.level-feature {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  background: rgba(192,57,43,0.05);
+  border: 0.5px solid rgba(192,57,43,0.12);
+  border-radius: 12px;
+  font-size: 13px; font-weight: 500;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.level-feature:hover {
+  background: rgba(192,57,43,0.1);
+  border-color: var(--red);
+  color: var(--red-dark);
+}
+
+.feat-icon { font-size: 16px; flex-shrink: 0; }
+
+/* Flashcard modal */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(26,10,5,0.75);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.show { display: flex; }
+
+.modal-box {
+  background: var(--paper);
+  border: 2px solid var(--border);
+  border-radius: 24px;
+  padding: 32px;
+  max-width: 520px; width: 100%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(96,26,17,0.4);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 32px; height: 32px;
+  background: rgba(192,57,43,0.1);
+  border: none; border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px; color: var(--red-dark);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.modal-close:hover { background: rgba(192,57,43,0.2); }
+
+.modal-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--red-dark);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 1px;
+}
+
+/* flashcard */
+.flashcard {
+  perspective: 1000px;
+  height: 200px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.flashcard-inner {
+  width: 100%; height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+
+.card-face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  border: 1.5px solid var(--border);
+}
+
+.card-front {
+  background: linear-gradient(135deg, var(--red-deep), var(--red-dark));
+}
+
+.card-back {
+  background: #fff;
+  transform: rotateY(180deg);
+}
+
+.card-hanzi {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 60px;
+  color: var(--gold-light);
+  text-shadow: 0 0 20px rgba(240,192,64,0.3);
+  line-height: 1;
+}
+
+.card-hint {
+  font-size: 12px; color: rgba(240,192,64,0.5);
+  margin-top: 8px;
+}
+
+.card-pinyin {
+  font-size: 22px; font-weight: 700;
+  color: var(--red); margin-bottom: 8px;
+}
+
+.card-meaning-vn { font-size: 16px; color: var(--ink); margin-bottom: 4px; }
+.card-meaning-en { font-size: 14px; color: var(--muted); }
+
+.fc-controls {
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.fc-nav {
+  display: flex; gap: 10px;
+}
+
+.fc-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.fc-btn:hover { border-color: var(--red); color: var(--red); }
+
+.fc-btn.primary {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+
+.fc-btn.primary:hover { background: var(--red-dark); }
+
+.fc-count {
+  font-size: 13px; color: var(--muted);
+  font-family: 'Cinzel', serif;
+}
+
+/* grammar content */
+.grammar-content { line-height: 1.8; }
+.grammar-content h4 { color: var(--red-dark); font-family: 'Noto Serif SC',serif; margin-bottom: 8px; font-size: 15px; }
+.grammar-content p { color: var(--ink-soft); font-size: 14px; margin-bottom: 12px; }
+.grammar-content .example {
+  background: rgba(192,57,43,0.06);
+  border-left: 3px solid var(--red);
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  margin: 8px 0;
+  font-size: 14px;
+}
+.grammar-content .cn { font-family: 'Ma Shan Zheng',cursive; font-size: 20px; color: var(--red-dark); }
+.grammar-content .py { font-size: 13px; color: var(--red); font-weight: 600; }
+.grammar-content .vn { font-size: 13px; color: var(--muted); }
+
+/* image recognition */
+.img-recog-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 12px;
+  margin-bottom: 16px;
+}
+.img-card {
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #fff;
+}
+.img-card:hover { border-color: var(--red); transform: scale(1.03); }
+.img-card.selected { border-color: var(--red); background: rgba(192,57,43,0.06); }
+.img-emoji { font-size: 36px; margin-bottom: 6px; display: block; }
+.img-question { font-size: 14px; color: var(--ink-soft); font-weight: 600; }
+
+/* ═══════════════════════════════
+   MOVIES PAGE
+═══════════════════════════════ */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.movie-card {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.25s;
+}
+
+.movie-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+
+.movie-thumb {
+  width: 100%; aspect-ratio: 2/3;
+  object-fit: cover;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 60px;
+  position: relative; overflow: hidden;
+}
+
+.movie-poster {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 12px;
+  padding: 20px;
+}
+
+.movie-emoji { font-size: 48px; }
+
+.movie-cn-title {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 24px;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.movie-play-btn {
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  border: 2px solid rgba(255,255,255,0.4);
+  transition: all 0.2s;
+}
+
+.movie-card:hover .movie-play-btn {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.movie-info { padding: 14px 16px; }
+
+.movie-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px; font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: color 0.2s;
+  text-decoration: none;
+  display: block;
+}
+
+.movie-title:hover { color: var(--red); }
+
+.movie-meta {
+  font-size: 11px;
+  color: var(--muted);
+  display: flex; gap: 8px; align-items: center;
+  flex-wrap: wrap;
+}
+
+.movie-year {
+  background: rgba(192,57,43,0.08);
+  border: 0.5px solid rgba(192,57,43,0.2);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 10px;
+  color: var(--red-dark);
+  font-weight: 700;
+}
+
+/* filter tabs */
+.filter-row {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.filter-chip {
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-size: 12px; font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+.filter-chip:hover { border-color: var(--red); color: var(--red-dark); }
+.filter-chip.active { background: var(--red); color: #fff; border-color: var(--red); }
+
+/* ═══════════════════════════════
+   EXAM PAGE
+═══════════════════════════════ */
+.exam-hero-banner {
+  background: linear-gradient(135deg, var(--red-deep), var(--red-dark));
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 32px;
+  position: relative; overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.exam-hero-banner::before {
+  content: '考試';
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 120px;
+  position: absolute; right: 20px; top: 50%;
+  transform: translateY(-50%);
+  color: rgba(212,160,23,0.1);
+}
+
+.exam-hero-banner h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 26px; font-weight: 900;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+}
+
+.exam-hero-banner p {
+  color: rgba(240,192,64,0.6);
+  font-size: 14px;
+  max-width: 400px;
+}
+
+.exam-levels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.exam-level-section {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.exam-level-header {
+  padding: 18px 24px;
+  display: flex; align-items: center; gap: 14px;
+}
+
+.exam-level-num {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 18px; font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.exam-level-info {}
+
+.exam-level-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.exam-level-desc {
+  font-size: 12px; color: var(--muted);
+}
+
+.exam-list {
+  padding: 0 24px 20px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.exam-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  background: rgba(192,57,43,0.04);
+  border: 0.5px solid rgba(192,57,43,0.12);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.exam-item:hover {
+  background: rgba(192,57,43,0.1);
+  border-color: var(--red);
+}
+
+.exam-icon { font-size: 18px; flex-shrink: 0; }
+
+.exam-item-info { flex: 1; }
+
+.exam-item-name {
+  font-size: 13px; font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: 2px;
+}
+
+.exam-item-meta {
+  font-size: 11px; color: var(--muted);
+}
+
+.exam-arrow {
+  color: var(--muted); font-size: 14px;
+  transition: transform 0.2s;
+}
+
+.exam-item:hover .exam-arrow {
+  transform: translateX(4px);
+  color: var(--red);
+}
+
+/* section heading */
+.section-heading {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 24px;
+}
+
+.section-heading h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px; font-weight: 900;
+  color: var(--red-dark);
+  letter-spacing: 1px;
+}
+
+.section-heading::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+.section-cn-deco {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 28px;
+  color: rgba(192,57,43,0.2);
+}
+
+/* ornament */
+.ornament {
+  text-align: center;
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 24px;
+  color: rgba(212,160,23,0.4);
+  letter-spacing: 8px;
+  margin: 24px 0;
+}
+
+@media(max-width:600px){
+  .levels-grid{grid-template-columns:1fr;}
+  .movies-grid{grid-template-columns:repeat(2,1fr);}
+  .exam-levels-grid{grid-template-columns:1fr;}
+  .nav-tab{padding:16px 14px;font-size:12px;}
+  .img-recog-grid{grid-template-columns:repeat(3,1fr);}
+  .quick-grid{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <span class="logo-char">漢</span>
+      <div class="logo-text">
+        <span class="logo-cn">漢語學習</span>
+        <span class="logo-vn">Học Tiếng Trung</span>
+      </div>
+    </a>
+    <div class="nav-tabs">
+      <button class="nav-tab active" data-tab="home"><span class="tab-icon">🏮</span> Từ điển</button>
+      <button class="nav-tab" data-tab="levels"><span class="tab-icon">📚</span> Cấp độ</button>
+      <button class="nav-tab" data-tab="movies"><span class="tab-icon">🎬</span> Phim</button>
+      <button class="nav-tab" data-tab="exam"><span class="tab-icon">📝</span> Thi HSK</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HOME: DICTIONARY ═══ -->
+<div class="screen active" id="screen-home">
+  <div class="dict-hero">
+    <div class="dict-deco">辭 典</div>
+    <div class="dict-title">辭 <em>典</em></div>
+    <div class="dict-subtitle">Từ điển Hoa — Việt — Anh · Tra từ bằng pinyin hoặc chữ Hán</div>
+  </div>
+
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="vi">🇻🇳 Việt</button>
+    <button class="lang-btn" data-lang="zh">🇨🇳 中文</button>
+    <button class="lang-btn" data-lang="en">🇬🇧 English</button>
+  </div>
+
+  <div class="search-box-wrap">
+    <input class="search-box" id="searchInput" type="text" placeholder="Nhập pinyin hoặc chữ Hán... (vd: nǐ hǎo / 你好)" autocomplete="off"/>
+    <button class="search-btn" id="searchBtn">🔍</button>
+  </div>
+
+  <div class="dict-result" id="dictResult">
+    <div class="result-card">
+      <div class="result-hanzi" id="res-hanzi">你好</div>
+      <div class="result-pinyin" id="res-pinyin">nǐ hǎo</div>
+      <div class="result-divider"></div>
+      <div class="result-row">
+        <span class="result-lang">VN</span>
+        <span class="result-meaning" id="res-vn">Xin chào</span>
+      </div>
+      <div class="result-row">
+        <span class="result-lang">EN</span>
+        <span class="result-meaning" id="res-en">Hello / Hi</span>
+      </div>
+      <div class="result-tags" id="res-tags"></div>
+    </div>
+  </div>
+
+  <div class="quick-words">
+    <div class="quick-label">Từ thông dụng</div>
+    <div class="quick-grid" id="quickGrid"></div>
+  </div>
+
+  <div class="ornament">❧ ✦ 中 ✦ ❧</div>
+</div>
+
+<!-- ═══ LEVELS ═══ -->
+<div class="screen" id="screen-levels">
+  <div class="levels-intro">
+    <div class="hsk-badge">🎓 Chương trình HSK Quốc tế</div>
+    <h2 style="font-family:'Noto Serif SC',serif;font-size:28px;font-weight:900;color:var(--red-dark);letter-spacing:2px;margin-bottom:8px;">Cấp độ học tập</h2>
+    <p style="color:var(--muted);font-size:14px;">Từ người mới bắt đầu đến thành thạo — học theo lộ trình HSK 1–6</p>
+  </div>
+
+  <div class="levels-grid">
+    <!-- Level 1 -->
+    <div class="level-card lv1">
+      <div class="level-header" data-char="一">
+        <div class="level-num">HSK LEVEL</div>
+        <div class="level-name">Cấp 1 — 入门</div>
+        <div class="level-words">150 từ vựng cơ bản</div>
+      </div>
+      <div class="level-body">
+        <div class="level-features">
+          <div class="level-feature" onclick="openFlashcard(1)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(1)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(1)"><span class="feat-icon">📖</span> Ngữ pháp cơ bản</div>
+        </div>
+      </div>
+    </div>
+    <!-- Level 2 -->
+    <div class="level-card lv2">
+      <div class="level-header" data-char="二">
+        <div class="level-num">HSK LEVEL</div>
+        <div class="level-name">Cấp 2 — 初级</div>
+        <div class="level-words">300 từ vựng</div>
+      </div>
+      <div class="level-body">
+        <div class="level-features">
+          <div class="level-feature" onclick="openFlashcard(2)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(2)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(2)"><span class="feat-icon">📖</span> Ngữ pháp sơ cấp</div>
+        </div>
+      </div>
+    </div>
+    <!-- Level 3 -->
+    <div class="level-card lv3">
+      <div class="level-header" data-char="三">
+        <div class="level-num">HSK LEVEL</div>
+        <div class="level-name">Cấp 3 — 中级</div>
+        <div class="level-words">600 từ vựng</div>
+      </div>
+      <div class="level-body">
+        <div class="level-features">
+          <div class="level-feature" onclick="openFlashcard(3)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(3)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(3)"><span class="feat-icon">📖</span> Ngữ pháp trung cấp</div>
+        </div>
+      </div>
+    </div>
+    <!-- Level 4 -->
+    <div class="level-card lv4">
+      <div class="level-header" data-char="四">
+        <div class="level-num">HSK LEVEL</div>
+        <div class="level-name">Cấp 4 — 中高级</div>
+        <div class="level-words">1200 từ vựng</div>
+      </div>
+      <div class="level-body">
+        <div class="level-features">
+          <div class="level-feature" onclick="openFlashcard(4)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(4)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(4)"><span class="feat-icon">📖</span> Ngữ pháp nâng cao</div>
+        </div>
+      </div>
+    </div>
+    <!-- Level 5 -->
+    <div class="level-card lv5">
+      <div class="level-header" data-char="五">
+        <div class="level-num">HSK LEVEL</div>
+        <div class="level-name">Cấp 5 — 高级</div>
+        <div class="level-words">2500 từ vựng</div>
+      </div>
+      <div class="level-body">
+        <div class="level-features">
+          <div class="level-feature" onclick="openFlashcard(5)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(5)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(5)"><span class="feat-icon">📖</span> Ngữ pháp cao cấp</div>
+        </div>
+      </div>
+    </div>
+    <!-- Level 6 -->
+    <div class="level-card lv6">
+      <div class="level-header" data-char="六">
+        <div class="level-num">HSK LEVEL</div>
+        <div class="level-name">Cấp 6 — 精通</div>
+        <div class="level-words">5000+ từ vựng</div>
+      </div>
+      <div class="level-body">
+        <div class="level-features">
+          <div class="level-feature" onclick="openFlashcard(6)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(6)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(6)"><span class="feat-icon">📖</span> Ngữ pháp tinh thông</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MOVIES ═══ -->
+<div class="screen" id="screen-movies">
+  <div class="section-heading">
+    <h2>Phim Trung Quốc</h2>
+    <span class="section-cn-deco">电影</span>
+  </div>
+
+  <div class="filter-row" id="movieFilter">
+    <button class="filter-chip active" data-genre="all">Tất cả</button>
+    <button class="filter-chip" data-genre="drama">Phim truyền hình</button>
+    <button class="filter-chip" data-genre="historical">Cổ trang</button>
+    <button class="filter-chip" data-genre="modern">Hiện đại</button>
+    <button class="filter-chip" data-genre="movie">Điện ảnh</button>
+    <button class="filter-chip" data-genre="animation">Hoạt hình</button>
+  </div>
+
+  <div class="movies-grid" id="moviesGrid"></div>
+</div>
+
+<!-- ═══ EXAM ═══ -->
+<div class="screen" id="screen-exam">
+  <div class="exam-hero-banner">
+    <h2>Thi HSK — 汉语水平考试</h2>
+    <p>Bộ đề thi chuẩn HSK theo từng cấp độ. Luyện tập với đề thi thực tế để chuẩn bị tốt nhất.</p>
+  </div>
+
+  <div class="exam-levels-grid" id="examGrid"></div>
+</div>
+
+</div><!-- .app -->
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-title" id="modalTitle">Flashcard</div>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+/* ════ NAVIGATION ════ */
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('screen-' + tab.dataset.tab).classList.add('active');
+  });
+});
+
+/* ════ DICTIONARY DATA ════ */
+const DICT = [
+  {cn:'你好',py:'nǐ hǎo',vn:'Xin chào',en:'Hello / Hi',tags:['Chào hỏi','HSK 1']},
+  {cn:'谢谢',py:'xiè xiè',vn:'Cảm ơn',en:'Thank you',tags:['Xã giao','HSK 1']},
+  {cn:'对不起',py:'duì bu qǐ',vn:'Xin lỗi',en:'Sorry / Excuse me',tags:['Xã giao','HSK 1']},
+  {cn:'再见',py:'zài jiàn',vn:'Tạm biệt',en:'Goodbye',tags:['Chào hỏi','HSK 1']},
+  {cn:'我爱你',py:'wǒ ài nǐ',vn:'Tôi yêu bạn',en:'I love you',tags:['Cảm xúc','HSK 2']},
+  {cn:'朋友',py:'péng yǒu',vn:'Bạn bè',en:'Friend',tags:['Quan hệ','HSK 1']},
+  {cn:'家人',py:'jiā rén',vn:'Gia đình',en:'Family',tags:['Gia đình','HSK 2']},
+  {cn:'吃饭',py:'chī fàn',vn:'Ăn cơm',en:'To eat a meal',tags:['Ăn uống','HSK 1']},
+  {cn:'学习',py:'xué xí',vn:'Học tập',en:'To study / learn',tags:['Học tập','HSK 1']},
+  {cn:'工作',py:'gōng zuò',vn:'Làm việc',en:'To work / job',tags:['Công việc','HSK 2']},
+  {cn:'中国',py:'zhōng guó',vn:'Trung Quốc',en:'China',tags:['Địa danh','HSK 1']},
+  {cn:'越南',py:'yuè nán',vn:'Việt Nam',en:'Vietnam',tags:['Địa danh']},
+  {cn:'漂亮',py:'piào liang',vn:'Đẹp, xinh đẹp',en:'Beautiful / Pretty',tags:['Tính từ','HSK 2']},
+  {cn:'高兴',py:'gāo xìng',vn:'Vui mừng',en:'Happy / Glad',tags:['Cảm xúc','HSK 2']},
+  {cn:'钱',py:'qián',vn:'Tiền',en:'Money',tags:['Tài chính','HSK 2']},
+  {cn:'时间',py:'shí jiān',vn:'Thời gian',en:'Time',tags:['Thời gian','HSK 2']},
+  {cn:'明天',py:'míng tiān',vn:'Ngày mai',en:'Tomorrow',tags:['Thời gian','HSK 1']},
+  {cn:'天气',py:'tiān qì',vn:'Thời tiết',en:'Weather',tags:['Thiên nhiên','HSK 2']},
+  {cn:'音乐',py:'yīn yuè',vn:'Âm nhạc',en:'Music',tags:['Nghệ thuật','HSK 3']},
+  {cn:'电影',py:'diàn yǐng',vn:'Phim điện ảnh',en:'Movie / Film',tags:['Giải trí','HSK 2']},
+  {cn:'书',py:'shū',vn:'Sách',en:'Book',tags:['Học tập','HSK 1']},
+  {cn:'水',py:'shuǐ',vn:'Nước',en:'Water',tags:['Đồ uống','HSK 1']},
+  {cn:'爱',py:'ài',vn:'Yêu',en:'Love',tags:['Cảm xúc','HSK 2']},
+  {cn:'美好',py:'měi hǎo',vn:'Tốt đẹp, tuyệt vời',en:'Beautiful / Wonderful',tags:['Tính từ','HSK 4']},
+  {cn:'努力',py:'nǔ lì',vn:'Cố gắng, nỗ lực',en:'To work hard / strive',tags:['Hành động','HSK 3']},
+  {cn:'希望',py:'xī wàng',vn:'Hy vọng',en:'Hope / Wish',tags:['Cảm xúc','HSK 3']},
+  {cn:'快乐',py:'kuài lè',vn:'Hạnh phúc, vui vẻ',en:'Happy / Joyful',tags:['Cảm xúc','HSK 2']},
+  {cn:'成功',py:'chéng gōng',vn:'Thành công',en:'Success / Succeed',tags:['Mục tiêu','HSK 4']},
+  {cn:'文化',py:'wén huà',vn:'Văn hóa',en:'Culture',tags:['Xã hội','HSK 4']},
+  {cn:'历史',py:'lì shǐ',vn:'Lịch sử',en:'History',tags:['Học thuật','HSK 4']},
+];
+
+const QUICK_WORDS = DICT.slice(0, 12);
+
+/* build quick grid */
+const qg = document.getElementById('quickGrid');
+QUICK_WORDS.forEach(w => {
+  const chip = document.createElement('div');
+  chip.className = 'quick-chip';
+  chip.innerHTML = `<div class="quick-cn">${w.cn}</div><div class="quick-py">${w.py}</div><div class="quick-vn">${w.vn}</div>`;
+  chip.addEventListener('click', () => showResult(w));
+  qg.appendChild(chip);
+});
+
+/* search */
+let searchLang = 'vi';
+
+document.querySelectorAll('.lang-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.lang-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    searchLang = b.dataset.lang;
+    const ph = searchLang === 'vi' ? 'Nhập pinyin hoặc chữ Hán... (vd: nǐ hǎo / 你好)'
+              : searchLang === 'zh' ? '输入拼音或汉字... (例如: nǐ hǎo / 你好)'
+              : 'Enter pinyin or Chinese characters...';
+    document.getElementById('searchInput').placeholder = ph;
+  });
+});
+
+function searchDict(query) {
+  query = query.trim().toLowerCase();
+  if (!query) return null;
+  return DICT.find(w =>
+    w.cn.includes(query) ||
+    w.py.toLowerCase().includes(query) ||
+    w.vn.toLowerCase().includes(query) ||
+    w.en.toLowerCase().includes(query)
+  ) || null;
+}
+
+function showResult(word) {
+  if (!word) return;
+  document.getElementById('res-hanzi').textContent = word.cn;
+  document.getElementById('res-pinyin').textContent = word.py;
+  document.getElementById('res-vn').textContent = word.vn;
+  document.getElementById('res-en').textContent = word.en;
+  const tagsEl = document.getElementById('res-tags');
+  tagsEl.innerHTML = (word.tags || []).map(t => `<span class="result-tag">${t}</span>`).join('');
+  document.getElementById('dictResult').classList.add('show');
+  document.getElementById('dictResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+document.getElementById('searchBtn').addEventListener('click', () => {
+  const q = document.getElementById('searchInput').value;
+  const res = searchDict(q);
+  if (res) showResult(res);
+  else {
+    // show a placeholder result
+    showResult({cn:'???',py:q||'—',vn:'Không tìm thấy từ này',en:'Word not found',tags:['Thử lại']});
+  }
+});
+
+document.getElementById('searchInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('searchBtn').click();
+});
+
+/* ════ LEVELS DATA ════ */
+const FLASHCARDS = {
+  1: [
+    {cn:'我',py:'wǒ',vn:'Tôi, tao',en:'I / Me'},
+    {cn:'你',py:'nǐ',vn:'Bạn, mày',en:'You'},
+    {cn:'他',py:'tā',vn:'Anh ấy',en:'He / Him'},
+    {cn:'她',py:'tā',vn:'Cô ấy',en:'She / Her'},
+    {cn:'们',py:'men',vn:'(số nhiều)',en:'(plural marker)'},
+    {cn:'好',py:'hǎo',vn:'Tốt, tốt lành',en:'Good / Well'},
+    {cn:'不',py:'bù',vn:'Không',en:'No / Not'},
+    {cn:'是',py:'shì',vn:'Là',en:'Is / Am / Are'},
+    {cn:'有',py:'yǒu',vn:'Có',en:'Have / There is'},
+    {cn:'人',py:'rén',vn:'Người',en:'Person'},
+  ],
+  2: [
+    {cn:'但是',py:'dàn shì',vn:'Nhưng mà',en:'But / However'},
+    {cn:'因为',py:'yīn wèi',vn:'Vì, bởi vì',en:'Because'},
+    {cn:'所以',py:'suǒ yǐ',vn:'Vì vậy, do đó',en:'Therefore / So'},
+    {cn:'觉得',py:'jué de',vn:'Cảm thấy, cho rằng',en:'To feel / think'},
+    {cn:'知道',py:'zhī dào',vn:'Biết',en:'To know'},
+    {cn:'喜欢',py:'xǐ huān',vn:'Thích',en:'To like'},
+    {cn:'想',py:'xiǎng',vn:'Muốn, nghĩ',en:'Want / Think'},
+    {cn:'可以',py:'kě yǐ',vn:'Có thể',en:'Can / May'},
+    {cn:'一起',py:'yī qǐ',vn:'Cùng nhau',en:'Together'},
+    {cn:'已经',py:'yǐ jīng',vn:'Đã, rồi',en:'Already'},
+  ],
+  3: [
+    {cn:'虽然',py:'suī rán',vn:'Mặc dù',en:'Although'},
+    {cn:'开始',py:'kāi shǐ',vn:'Bắt đầu',en:'To begin / start'},
+    {cn:'结束',py:'jié shù',vn:'Kết thúc',en:'To end / finish'},
+    {cn:'帮助',py:'bāng zhù',vn:'Giúp đỡ',en:'To help'},
+    {cn:'变化',py:'biàn huà',vn:'Sự thay đổi',en:'Change'},
+    {cn:'发现',py:'fā xiàn',vn:'Phát hiện',en:'To discover'},
+    {cn:'经验',py:'jīng yàn',vn:'Kinh nghiệm',en:'Experience'},
+    {cn:'方法',py:'fāng fǎ',vn:'Phương pháp',en:'Method / Way'},
+    {cn:'选择',py:'xuǎn zé',vn:'Lựa chọn',en:'To choose'},
+    {cn:'机会',py:'jī huì',vn:'Cơ hội',en:'Opportunity'},
+  ],
+  4: [
+    {cn:'影响',py:'yǐng xiǎng',vn:'Ảnh hưởng',en:'Influence / Impact'},
+    {cn:'环境',py:'huán jìng',vn:'Môi trường',en:'Environment'},
+    {cn:'发展',py:'fā zhǎn',vn:'Phát triển',en:'Development'},
+    {cn:'观念',py:'guān niàn',vn:'Quan niệm',en:'Concept / Idea'},
+    {cn:'压力',py:'yā lì',vn:'Áp lực',en:'Pressure / Stress'},
+    {cn:'效率',py:'xiào lǜ',vn:'Hiệu quả',en:'Efficiency'},
+    {cn:'竞争',py:'jìng zhēng',vn:'Cạnh tranh',en:'Competition'},
+    {cn:'传统',py:'chuán tǒng',vn:'Truyền thống',en:'Tradition'},
+    {cn:'社会',py:'shè huì',vn:'Xã hội',en:'Society'},
+    {cn:'经济',py:'jīng jì',vn:'Kinh tế',en:'Economy'},
+  ],
+  5: [
+    {cn:'辩证',py:'biàn zhèng',vn:'Biện chứng',en:'Dialectical'},
+    {cn:'融合',py:'róng hé',vn:'Hòa hợp, tích hợp',en:'Fusion / Integration'},
+    {cn:'精华',py:'jīng huá',vn:'Tinh hoa',en:'Essence / Best part'},
+    {cn:'价值观',py:'jià zhí guān',vn:'Quan điểm giá trị',en:'Values / Value system'},
+    {cn:'可持续',py:'kě chí xù',vn:'Bền vững',en:'Sustainable'},
+    {cn:'规律',py:'guī lǜ',vn:'Quy luật',en:'Law / Rule'},
+    {cn:'制度',py:'zhì dù',vn:'Chế độ, thể chế',en:'System / Institution'},
+    {cn:'哲学',py:'zhé xué',vn:'Triết học',en:'Philosophy'},
+    {cn:'意识形态',py:'yì shí xíng tài',vn:'Ý thức hệ',en:'Ideology'},
+    {cn:'辩论',py:'biàn lùn',vn:'Tranh luận',en:'Debate'},
+  ],
+  6: [
+    {cn:'气势磅礴',py:'qì shì páng bó',vn:'Hùng hồn, khí thế mạnh mẽ',en:'Grand and imposing'},
+    {cn:'举足轻重',py:'jǔ zú qīng zhòng',vn:'Có vai trò quan trọng',en:'Play a crucial role'},
+    {cn:'博大精深',py:'bó dà jīng shēn',vn:'Sâu rộng và thâm thúy',en:'Extensive and profound'},
+    {cn:'源远流长',py:'yuán yuǎn liú cháng',vn:'Có nguồn gốc lâu dài',en:'Have a long history'},
+    {cn:'与众不同',py:'yǔ zhòng bù tóng',vn:'Khác với mọi người',en:'Different from others'},
+    {cn:'一石二鸟',py:'yī shí èr niǎo',vn:'Một mũi tên trúng hai đích',en:'Kill two birds with one stone'},
+    {cn:'马到成功',py:'mǎ dào chéng gōng',vn:'Thành công ngay khi bắt đầu',en:'Immediate success'},
+    {cn:'半途而废',py:'bàn tú ér fèi',vn:'Bỏ dở giữa chừng',en:'Give up halfway'},
+    {cn:'锲而不舍',py:'qiè ér bù shě',vn:'Kiên trì không bỏ cuộc',en:'Persevere, never give up'},
+    {cn:'苦尽甘来',py:'kǔ jìn gān lái',vn:'Hết khổ đến ngọt',en:'After hardship comes joy'},
+  ]
+};
+
+const GRAMMAR = {
+  1: {
+    title: 'Ngữ pháp Cấp 1 — Câu cơ bản',
+    items: [
+      { head:'1. Câu khẳng định: S + 是 + N', body:'Cấu trúc cơ bản nhất để nói "là".',
+        examples:[{cn:'我是学生。',py:'Wǒ shì xuésheng.',vn:'Tôi là học sinh.'}]},
+      { head:'2. Câu phủ định: S + 不 + V', body:'Thêm 不 (bù) trước động từ để phủ định.',
+        examples:[{cn:'我不吃鱼。',py:'Wǒ bù chī yú.',vn:'Tôi không ăn cá.'}]},
+      { head:'3. Câu hỏi: S + V + 吗？', body:'Thêm 吗 (ma) cuối câu để hỏi.',
+        examples:[{cn:'你是中国人吗？',py:'Nǐ shì Zhōngguórén ma?',vn:'Bạn là người Trung Quốc không?'}]},
+    ]
+  },
+  2: {
+    title: 'Ngữ pháp Cấp 2 — Câu phức',
+    items: [
+      { head:'1. Kết cấu 因为…所以… (Vì…nên…)', body:'',
+        examples:[{cn:'因为下雨，所以我没出去。',py:'Yīnwèi xià yǔ, suǒyǐ wǒ méi chūqù.',vn:'Vì trời mưa nên tôi không ra ngoài.'}]},
+      { head:'2. 虽然…但是… (Mặc dù…nhưng…)', body:'',
+        examples:[{cn:'虽然很累，但是我很高兴。',py:'Suīrán hěn lèi, dànshì wǒ hěn gāoxìng.',vn:'Mặc dù rất mệt nhưng tôi rất vui.'}]},
+    ]
+  },
+  3: {
+    title: 'Ngữ pháp Cấp 3 — Thành phần câu',
+    items: [
+      { head:'1. Bổ ngữ kết quả: V + 好/完/到', body:'Diễn tả kết quả của hành động.',
+        examples:[{cn:'我做完作业了。',py:'Wǒ zuò wán zuòyè le.',vn:'Tôi đã làm xong bài tập.'}]},
+      { head:'2. Liên động: V1 + V2 (cùng chủ ngữ)', body:'',
+        examples:[{cn:'他坐着看书。',py:'Tā zuòzhe kàn shū.',vn:'Anh ấy ngồi đọc sách.'}]},
+    ]
+  },
+  4: {
+    title: 'Ngữ pháp Cấp 4 — Nâng cao',
+    items: [
+      { head:'1. Câu bị động: 被 (bèi)', body:'',
+        examples:[{cn:'书被他借走了。',py:'Shū bèi tā jiè zǒu le.',vn:'Sách bị anh ấy mượn đi rồi.'}]},
+      { head:'2. 把 (bǎ) — Đưa tân ngữ lên trước', body:'',
+        examples:[{cn:'请把书给我。',py:'Qǐng bǎ shū gěi wǒ.',vn:'Hãy đưa sách cho tôi.'}]},
+    ]
+  },
+  5: {
+    title: 'Ngữ pháp Cấp 5 — Cao cấp',
+    items: [
+      { head:'1. Cấu trúc nhượng bộ: 就算…也…', body:'',
+        examples:[{cn:'就算很困难，我也要坚持。',py:'Jiùsuàn hěn kùnnán, wǒ yě yào jiānchí.',vn:'Dù khó khăn đến đâu, tôi cũng sẽ kiên trì.'}]},
+      { head:'2. Nhấn mạnh: 连…都/也…', body:'',
+        examples:[{cn:'连小孩都知道。',py:'Lián xiǎohái dōu zhīdào.',vn:'Ngay cả trẻ con cũng biết.'}]},
+    ]
+  },
+  6: {
+    title: 'Ngữ pháp Cấp 6 — Tinh thông',
+    items: [
+      { head:'1. Thành ngữ 4 chữ (四字成语)', body:'Diễn đạt tư tưởng phức tạp qua thành ngữ cổ.',
+        examples:[{cn:'一石二鸟，事半功倍。',py:'Yī shí èr niǎo, shì bàn gōng bèi.',vn:'Một mũi tên trúng hai đích, việc ít công nhiều.'}]},
+      { head:'2. Văn phong trang trọng và văn học', body:'',
+        examples:[{cn:'此次前来，特表谢意。',py:'Cǐ cì qián lái, tè biǎo xièyì.',vn:'Lần này đến đây, đặc biệt bày tỏ lòng biết ơn.'}]},
+    ]
+  }
+};
+
+const IMG_RECOG = {
+  1: [
+    {emoji:'🍚',question:'什么？',answer:'饭 (fàn) — Cơm'},
+    {emoji:'📚',question:'什么？',answer:'书 (shū) — Sách'},
+    {emoji:'🌊',question:'什么？',answer:'水 (shuǐ) — Nước'},
+    {emoji:'🐱',question:'什么？',answer:'猫 (māo) — Mèo'},
+    {emoji:'🏠',question:'什么？',answer:'家 (jiā) — Nhà'},
+    {emoji:'☀️',question:'什么？',answer:'太阳 (tài yáng) — Mặt trời'},
+  ],
+  2:[{emoji:'🚌',question:'什么？',answer:'公共汽车 — Xe buýt'},{emoji:'🏥',question:'什么？',answer:'医院 — Bệnh viện'},{emoji:'🎓',question:'什么？',answer:'大学 — Đại học'},{emoji:'🌧️',question:'什么？',answer:'下雨 — Mưa'},{emoji:'🛒',question:'什么？',answer:'超市 — Siêu thị'},{emoji:'📱',question:'什么？',answer:'手机 — Điện thoại'},],
+  3:[{emoji:'🏔️',question:'什么？',answer:'山 (shān) — Núi'},{emoji:'🌊',question:'什么？',answer:'海 (hǎi) — Biển'},{emoji:'🌸',question:'什么？',answer:'花 (huā) — Hoa'},{emoji:'🎵',question:'什么？',answer:'音乐 — Âm nhạc'},{emoji:'🎭',question:'什么？',answer:'艺术 — Nghệ thuật'},{emoji:'🏛️',question:'什么？',answer:'博物馆 — Bảo tàng'},],
+  4:[{emoji:'💼',question:'什么？',answer:'工作 — Công việc'},{emoji:'📊',question:'什么？',answer:'经济 — Kinh tế'},{emoji:'🌍',question:'什么？',answer:'环境 — Môi trường'},{emoji:'🏛️',question:'什么？',answer:'政府 — Chính phủ'},{emoji:'🤝',question:'什么？',answer:'合作 — Hợp tác'},{emoji:'🎯',question:'什么？',answer:'目标 — Mục tiêu'},],
+  5:[{emoji:'⚖️',question:'什么？',answer:'法律 — Pháp luật'},{emoji:'🧬',question:'什么？',answer:'科技 — Khoa học kỹ thuật'},{emoji:'🌐',question:'什么？',answer:'全球化 — Toàn cầu hóa'},{emoji:'📰',question:'什么？',answer:'媒体 — Truyền thông'},{emoji:'🎨',question:'什么？',answer:'文化 — Văn hóa'},{emoji:'💡',question:'什么？',answer:'创新 — Sáng tạo'},],
+  6:[{emoji:'🏯',question:'什么？',answer:'故宫 — Cố Cung'},{emoji:'🐉',question:'什么？',answer:'龙 — Rồng'},{emoji:'☯️',question:'什么？',answer:'阴阳 — Âm dương'},{emoji:'🎋',question:'什么？',answer:'竹子 — Tre trúc'},{emoji:'🍵',question:'什么？',answer:'茶道 — Trà đạo'},{emoji:'🧧',question:'什么？',answer:'春节 — Tết Nguyên Đán'},],
+};
+
+/* ════ MODAL SYSTEM ════ */
+let currentFCIdx = 0, currentFCLevel = 1;
+
+function openModal(title, content) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalContent').innerHTML = content;
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+document.getElementById('modalClose').addEventListener('click', () => {
+  document.getElementById('modalOverlay').classList.remove('show');
+});
+
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalOverlay'))
+    document.getElementById('modalOverlay').classList.remove('show');
+});
+
+/* ── FLASHCARD ── */
+function renderFC(level, idx) {
+  const cards = FLASHCARDS[level];
+  const card = cards[idx];
+  return `
+    <div class="flashcard" id="fcEl" onclick="document.getElementById('fcEl').classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="card-face card-front">
+          <div class="card-hanzi">${card.cn}</div>
+          <div class="card-hint">点击翻转 · Bấm để lật</div>
+        </div>
+        <div class="card-face card-back">
+          <div class="card-pinyin">${card.py}</div>
+          <div class="card-meaning-vn">${card.vn}</div>
+          <div class="card-meaning-en">${card.en}</div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-controls">
+      <div class="fc-nav">
+        <button class="fc-btn" onclick="openFlashcard(${level},${Math.max(0,idx-1)})">← Trước</button>
+        <button class="fc-btn" onclick="openFlashcard(${level},${Math.min(cards.length-1,idx+1)})">Sau →</button>
+      </div>
+      <span class="fc-count">${idx+1} / ${cards.length}</span>
+    </div>`;
+}
+
+function openFlashcard(level, idx = 0) {
+  document.getElementById('modalTitle').textContent = `🃏 Flashcard — HSK ${level}`;
+  document.getElementById('modalContent').innerHTML = renderFC(level, idx);
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+/* ── IMAGE RECOGNITION ── */
+function openImageRecog(level) {
+  const imgs = IMG_RECOG[level] || IMG_RECOG[1];
+  let selected = null;
+  const html = `
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Bấm vào hình ảnh để xem từ tương ứng bằng tiếng Trung</p>
+    <div class="img-recog-grid" id="imgGrid">
+      ${imgs.map((im,i) => `
+        <div class="img-card" id="ic${i}" onclick="revealImg(${i},'${im.answer}')">
+          <span class="img-emoji">${im.emoji}</span>
+          <div class="img-question" id="iq${i}">${im.question}</div>
+        </div>`).join('')}
+    </div>`;
+  document.getElementById('modalTitle').textContent = `🖼️ Nhận biết qua hình ảnh — HSK ${level}`;
+  document.getElementById('modalContent').innerHTML = html;
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+function revealImg(i, answer) {
+  const el = document.getElementById('ic'+i);
+  const q  = document.getElementById('iq'+i);
+  el.classList.add('selected');
+  q.textContent = answer;
+  q.style.color = 'var(--red-dark)';
+  q.style.fontWeight = '700';
+}
+
+/* ── GRAMMAR ── */
+function openGrammar(level) {
+  const g = GRAMMAR[level];
+  const html = `<div class="grammar-content">` +
+    g.items.map(item => `
+      <h4>${item.head}</h4>
+      ${item.body ? `<p>${item.body}</p>` : ''}
+      ${item.examples.map(ex => `
+        <div class="example">
+          <div class="cn">${ex.cn}</div>
+          <div class="py">${ex.py}</div>
+          <div class="vn">${ex.vn}</div>
+        </div>`).join('')}
+    `).join('') + `</div>`;
+  document.getElementById('modalTitle').textContent = `📖 ${g.title}`;
+  document.getElementById('modalContent').innerHTML = html;
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+/* ════ MOVIES DATA ════ */
+const MOVIES = [
+  {title:'琅琊榜',titleVn:'Lang Nha Bang',year:2015,genre:'historical',bg:'#8B1A1A',emoji:'⚔️',url:'https://www.youtube.com/results?search_query=Lang+Nha+Bang+nianga+ji',desc:'Chính trị cung đình'},
+  {title:'甄嬛传',titleVn:'Hậu Cung Chân Hoàn Truyện',year:2011,genre:'historical',bg:'#6B2737',emoji:'👸',url:'https://www.youtube.com/results?search_query=Zhen+Huan+Zhuan',desc:'Hậu cung tranh đấu'},
+  {title:'延禧攻略',titleVn:'Diên Hi Công Lược',year:2018,genre:'historical',bg:'#2F4F4F',emoji:'🏯',url:'https://www.youtube.com/results?search_query=Yan+Xi+Gong+Lue',desc:'Hậu cung thời Thanh'},
+  {title:'请君',titleVn:'Thỉnh Quân',year:2022,genre:'historical',bg:'#4A235A',emoji:'🌸',url:'https://www.youtube.com/results?search_query=qing+jun+drama+2022',desc:'Cổ trang lãng mạn'},
+  {title:'爱情公寓',titleVn:'Chung Cư Tình Yêu',year:2009,genre:'modern',bg:'#1A3A5C',emoji:'🏘️',url:'https://www.youtube.com/results?search_query=Ipartment+Chinese+drama',desc:'Sitcom hiện đại'},
+  {title:'都挺好',titleVn:'Đều Rất Tốt',year:2019,genre:'modern',bg:'#1A4A2E',emoji:'👨‍👩‍👧',url:'https://www.youtube.com/results?search_query=du+ting+hao+drama',desc:'Phim gia đình'},
+  {title:'三十而已',titleVn:'Ba Mươi Chỉ Thế Thôi',year:2020,genre:'modern',bg:'#3D1A4A',emoji:'👩',url:'https://www.youtube.com/results?search_query=Nothing+But+Thirty+drama',desc:'Phụ nữ 30 tuổi'},
+  {title:'功夫',titleVn:'Kung Fu Hustle',year:2004,genre:'movie',bg:'#7A3B1E',emoji:'🥋',url:'https://www.youtube.com/results?search_query=Kung+Fu+Hustle+2004',desc:'Phim hài võ thuật'},
+  {title:'英雄',titleVn:'Anh Hùng',year:2002,genre:'movie',bg:'#1A1A4A',emoji:'🗡️',url:'https://www.youtube.com/results?search_query=Hero+2002+Zhang+Yimou',desc:'Kinh điển wuxia'},
+  {title:'卧虎藏龙',titleVn:'Ngọa Hổ Tàng Long',year:2000,genre:'movie',bg:'#1E3A2F',emoji:'🐉',url:'https://www.youtube.com/results?search_query=Crouching+Tiger+Hidden+Dragon',desc:'Phim Oscar'},
+  {title:'哪吒之魔童降世',titleVn:'Né Tra: Ma Đồng Giáng Thế',year:2019,genre:'animation',bg:'#0A1A3A',emoji:'🔥',url:'https://www.youtube.com/results?search_query=Ne+Zha+2019+animation',desc:'Hoạt hình thần thoại'},
+  {title:'大鱼海棠',titleVn:'Cá Lớn Hải Đường',year:2016,genre:'animation',bg:'#1A2A3A',emoji:'🐟',url:'https://www.youtube.com/results?search_query=Big+Fish+Begonia+2016',desc:'Hoạt hình nghệ thuật'},
+  {title:'白蛇：缘起',titleVn:'Bạch Xà: Duyên Khởi',year:2019,genre:'animation',bg:'#1A3A2A',emoji:'🐍',url:'https://www.youtube.com/results?search_query=White+Snake+2019+animation',desc:'Bạch Xà truyền thuyết'},
+  {title:'古相思曲',titleVn:'Khúc Tương Tư Cổ',year:2021,genre:'drama',bg:'#3A1A1A',emoji:'🎻',url:'https://www.youtube.com/results?search_query=gu+xiang+si+qu+drama',desc:'Phim âm nhạc cổ đại'},
+  {title:'知否知否',titleVn:'Hữu Phỉ',year:2019,genre:'historical',bg:'#4A2A1A',emoji:'🌺',url:'https://www.youtube.com/results?search_query=Ming+Lan+Story+drama',desc:'Gia đình thời Tống'},
+  {title:'陈情令',titleVn:'Trần Tình Lệnh',year:2019,genre:'historical',bg:'#1A1A2A',emoji:'⚡',url:'https://www.youtube.com/results?search_query=The+Untamed+2019',desc:'Tiên hiệp huyền huyễn'},
+];
+
+let movieGenre = 'all';
+
+function renderMovies() {
+  const grid = document.getElementById('moviesGrid');
+  const list = movieGenre === 'all' ? MOVIES : MOVIES.filter(m => m.genre === movieGenre);
+  grid.innerHTML = list.map(m => `
+    <div class="movie-card">
+      <div class="movie-thumb" style="background:${m.bg};">
+        <div class="movie-poster">
+          <span class="movie-emoji">${m.emoji}</span>
+          <div class="movie-cn-title">${m.title}</div>
+          <div class="movie-play-btn">▶</div>
+        </div>
+      </div>
+      <div class="movie-info">
+        <a class="movie-title" href="${m.url}" target="_blank" rel="noopener">${m.titleVn}</a>
+        <div class="movie-meta">
+          <span class="movie-year">${m.year}</span>
+          <span>${m.desc}</span>
+        </div>
+      </div>
+    </div>`).join('');
+
+  // also make poster clickable
+  grid.querySelectorAll('.movie-thumb').forEach((el, i) => {
+    const movieList = movieGenre === 'all' ? MOVIES : MOVIES.filter(m => m.genre === movieGenre);
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', () => window.open(movieList[i].url, '_blank'));
+  });
+}
+
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    movieGenre = chip.dataset.genre;
+    renderMovies();
+  });
+});
+
+renderMovies();
+
+/* ════ EXAM DATA ════ */
+const EXAM_LEVELS = [
+  {
+    level: 1, name: 'HSK 1', desc: '150 từ · A1 · Giao tiếp cơ bản',
+    color: '#e74c3c', num_color: '#c0392b',
+    exams: [
+      {name:'Đề thi HSK 1 — 2020', meta:'40 câu · 50 phút', url:'https://www.chinesetest.cn/gosampletest.do'},
+      {name:'Đề thi HSK 1 — 2021', meta:'40 câu · 50 phút', url:'https://www.chinesetest.cn/gosampletest.do'},
+      {name:'Đề luyện tập số 1', meta:'Tổng hợp', url:'https://www.hsktest.cn/hsk1/'},
+      {name:'Đề luyện tập số 2', meta:'Tổng hợp', url:'https://www.hsktest.cn/hsk1/'},
+    ]
+  },
+  {
+    level: 2, name: 'HSK 2', desc: '300 từ · A2 · Giao tiếp đơn giản',
+    color: '#d35400', num_color: '#a04000',
+    exams: [
+      {name:'Đề thi HSK 2 — 2020', meta:'60 câu · 55 phút', url:'https://www.chinesetest.cn/gosampletest.do'},
+      {name:'Đề thi HSK 2 — 2021', meta:'60 câu · 55 phút', url:'https://www.chinesetest.cn/gosampletest.do'},
+      {name:'Đề luyện tập số 1', meta:'Tổng hợp', url:'https://www.hsktest.cn/hsk2/'},
+      {name:'Đề luyện tập số 2', meta:'Tổng hợp', url:'https://www.hsktest.cn/hsk2/'},
+    ]
+  },
+  {
+    level: 3, name: 'HSK 3', desc: '600 từ · B1 · Giao tiếp trung cấp',
+    color: '#c0392b', num_color: '#922b21',
+    exams: [
+      {name:'Đề thi HSK 3 — 2020', meta:'80 câu · 90 phút', url:'https://www.chinesetest.cn/gosampletest.do'},
+      {name:'Đề thi HSK 3 — 2021', meta:'80 câu · 90 phút', url:'https://www.chinesetest.cn/gosampletest.do'},
+      {name:'Đề luyện tập số 1', meta:'Tổng hợp', url:'https://www.hsktest.cn/hsk3/'},
+      {name:'Đề luyện tập số 2', meta:'Tổng hợp', url:'https://www.hsktest.cn/hsk3/'},
+    ]
+  },
+  {
+    level: 4, name: 'HSK 4', desc: '1200 từ · B2 · Trình độ trung cao',
+    color: '#922b21', num_color: '#641e16',
+    exams: [
+      {name:'Đề thi HSK 4 — 2020', meta:'100 câu · 105 phút', url:'https://www.chinesetest.cn/gosampletest.do'},
+      {name:'Đề thi HSK 4 — 2021', meta:'100 câu · 105 phút', url:'https://www.chinesetest.cn/gosampletest.do'},
+      {name:'Đề luyện tập số 1', meta:'Tổng hợp', url:'https://www.hsktest.cn/hsk4/'},
+      {name:'Đề luyện tập số 2', meta:'Tổng hợp', url:'https://www.hsktest.cn/hsk4/'},
+    ]
+  },
+  {
+    level: 5, name: 'HSK 5', desc: '2500 từ · C1 · Cao cấp',
+    color: '#7b241c', num_color: '#512e5f',
+    exams: [
+      {name:'Đề thi HSK 5 — 2020', meta:'100 câu · 125 phút', url:'https://www.chinesetest.cn/gosampletest.do'},
+      {name:'Đề thi HSK 5 — 2021', meta:'100 câu · 125 phút', url:'https://www.chinesetest.cn/gosampletest.do'},
+      {name:'Đề luyện tập số 1', meta:'Tổng hợp', url:'https://www.hsktest.cn/hsk5/'},
+      {name:'Đề luyện tập số 2', meta:'Tổng hợp', url:'https://www.hsktest.cn/hsk5/'},
+    ]
+  },
+  {
+    level: 6, name: 'HSK 6', desc: '5000+ từ · C2 · Tinh thông',
+    color: '#2e4057', num_color: '#1a252f',
+    exams: [
+      {name:'Đề thi HSK 6 — 2020', meta:'101 câu · 140 phút', url:'https://www.chinesetest.cn/gosampletest.do'},
+      {name:'Đề thi HSK 6 — 2021', meta:'101 câu · 140 phút', url:'https://www.chinesetest.cn/gosampletest.do'},
+      {name:'Đề luyện tập số 1', meta:'Tổng hợp', url:'https://www.hsktest.cn/hsk6/'},
+      {name:'Đề luyện tập số 2', meta:'Tổng hợp', url:'https://www.hsktest.cn/hsk6/'},
+      {name:'Đề tổng hợp nâng cao', meta:'Tổng hợp', url:'https://www.hsktest.cn/hsk6/'},
+    ]
+  }
+];
+
+const examGrid = document.getElementById('examGrid');
+EXAM_LEVELS.forEach(lv => {
+  const icons = ['📝','📋','✍️','📄','🗒️'];
+  examGrid.innerHTML += `
+    <div class="exam-level-section">
+      <div class="exam-level-header">
+        <div class="exam-level-num" style="background:${lv.color}">${lv.level}</div>
+        <div class="exam-level-info">
+          <div class="exam-level-name">${lv.name} — 汉语水平考试</div>
+          <div class="exam-level-desc">${lv.desc}</div>
+        </div>
+      </div>
+      <div class="exam-list">
+        ${lv.exams.map((ex,i) => `
+          <a class="exam-item" href="${ex.url}" target="_blank" rel="noopener">
+            <span class="exam-icon">${icons[i%icons.length]}</span>
+            <div class="exam-item-info">
+              <div class="exam-item-name">${ex.name}</div>
+              <div class="exam-item-meta">${ex.meta}</div>
+            </div>
+            <span class="exam-arrow">→</span>
+          </a>`).join('')}
+      </div>
+    </div>`;
+});
+</script>
+</body>
+</html>
