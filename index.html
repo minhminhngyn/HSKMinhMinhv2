@@ -372,64 +372,6 @@ nav {
   font-weight: 600;
 }
 
-/* quick words */
-.quick-words {
-  max-width: 640px;
-  margin: 0 auto;
-}
-
-.quick-label {
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 12px;
-  display: flex; align-items: center; gap: 8px;
-}
-
-.quick-label::after {
-  content: ''; flex: 1; height: 1px;
-  background: linear-gradient(90deg, var(--border), transparent);
-}
-
-.quick-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 10px;
-}
-
-.quick-chip {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 12px 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 2px 8px rgba(96,26,17,0.06);
-}
-
-.quick-chip:hover {
-  border-color: var(--red);
-  box-shadow: 0 4px 16px rgba(192,57,43,0.15);
-  transform: translateY(-2px);
-}
-
-.quick-cn {
-  font-family: 'Ma Shan Zheng', cursive;
-  font-size: 22px;
-  color: var(--red-dark);
-  line-height: 1.2;
-}
-
-.quick-py {
-  font-size: 11px; color: var(--red); font-weight: 600;
-  margin-top: 2px;
-}
-
-.quick-vn {
-  font-size: 11px; color: var(--muted);
-  margin-top: 2px;
-}
-
 /* ═══════════════════════════════
    LEVELS PAGE
 ═══════════════════════════════ */
@@ -984,7 +926,6 @@ nav {
   .exam-levels-grid{grid-template-columns:1fr;}
   .nav-tab{padding:16px 14px;font-size:12px;}
   .img-recog-grid{grid-template-columns:repeat(3,1fr);}
-  .quick-grid{grid-template-columns:repeat(2,1fr);}
 }
 </style>
 </head>
@@ -1044,11 +985,6 @@ nav {
       </div>
       <div class="result-tags" id="res-tags"></div>
     </div>
-  </div>
-
-  <div class="quick-words">
-    <div class="quick-label">Từ thông dụng</div>
-    <div class="quick-grid" id="quickGrid"></div>
   </div>
 
   <div class="ornament">❧ ✦ 中 ✦ ❧</div>
@@ -1240,18 +1176,6 @@ const DICT = [
   {cn:'文化',py:'wén huà',vn:'Văn hóa',en:'Culture',tags:['Xã hội','HSK 4']},
   {cn:'历史',py:'lì shǐ',vn:'Lịch sử',en:'History',tags:['Học thuật','HSK 4']},
 ];
-
-const QUICK_WORDS = DICT.slice(0, 12);
-
-/* build quick grid */
-const qg = document.getElementById('quickGrid');
-QUICK_WORDS.forEach(w => {
-  const chip = document.createElement('div');
-  chip.className = 'quick-chip';
-  chip.innerHTML = `<div class="quick-cn">${w.cn}</div><div class="quick-py">${w.py}</div><div class="quick-vn">${w.vn}</div>`;
-  chip.addEventListener('click', () => showResult(w));
-  qg.appendChild(chip);
-});
 
 /* search */
 let searchLang = 'vi';
