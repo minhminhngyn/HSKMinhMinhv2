@@ -537,7 +537,6 @@ nav {
   color: var(--red-dark);
 }
 
-.feat-icon { font-size: 16px; flex-shrink: 0; }
 
 /* Flashcard modal */
 .modal-overlay {
@@ -1073,9 +1072,9 @@ nav {
       </div>
       <div class="level-body">
         <div class="level-features">
-          <div class="level-feature" onclick="openFlashcard(1)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
-          <div class="level-feature" onclick="openImageRecog(1)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
-          <div class="level-feature" onclick="openGrammar(1)"><span class="feat-icon">📖</span> Ngữ pháp cơ bản</div>
+          <div class="level-feature" onclick="openFlashcard(1)"> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(1)"> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(1)"> Ngữ pháp cơ bản</div>
         </div>
       </div>
     </div>
@@ -1088,9 +1087,9 @@ nav {
       </div>
       <div class="level-body">
         <div class="level-features">
-          <div class="level-feature" onclick="openFlashcard(2)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
-          <div class="level-feature" onclick="openImageRecog(2)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
-          <div class="level-feature" onclick="openGrammar(2)"><span class="feat-icon">📖</span> Ngữ pháp sơ cấp</div>
+          <div class="level-feature" onclick="openFlashcard(2)"> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(2)"> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(2)"> Ngữ pháp sơ cấp</div>
         </div>
       </div>
     </div>
@@ -1103,9 +1102,9 @@ nav {
       </div>
       <div class="level-body">
         <div class="level-features">
-          <div class="level-feature" onclick="openFlashcard(3)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
-          <div class="level-feature" onclick="openImageRecog(3)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
-          <div class="level-feature" onclick="openGrammar(3)"><span class="feat-icon">📖</span> Ngữ pháp trung cấp</div>
+          <div class="level-feature" onclick="openFlashcard(3)"> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(3)"> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(3)"> Ngữ pháp trung cấp</div>
         </div>
       </div>
     </div>
@@ -1118,9 +1117,9 @@ nav {
       </div>
       <div class="level-body">
         <div class="level-features">
-          <div class="level-feature" onclick="openFlashcard(4)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
-          <div class="level-feature" onclick="openImageRecog(4)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
-          <div class="level-feature" onclick="openGrammar(4)"><span class="feat-icon">📖</span> Ngữ pháp nâng cao</div>
+          <div class="level-feature" onclick="openFlashcard(4)"> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(4)"> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(4)"> Ngữ pháp nâng cao</div>
         </div>
       </div>
     </div>
@@ -1133,9 +1132,9 @@ nav {
       </div>
       <div class="level-body">
         <div class="level-features">
-          <div class="level-feature" onclick="openFlashcard(5)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
-          <div class="level-feature" onclick="openImageRecog(5)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
-          <div class="level-feature" onclick="openGrammar(5)"><span class="feat-icon">📖</span> Ngữ pháp cao cấp</div>
+          <div class="level-feature" onclick="openFlashcard(5)"> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(5)"> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(5)"> Ngữ pháp cao cấp</div>
         </div>
       </div>
     </div>
@@ -1148,9 +1147,9 @@ nav {
       </div>
       <div class="level-body">
         <div class="level-features">
-          <div class="level-feature" onclick="openFlashcard(6)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
-          <div class="level-feature" onclick="openImageRecog(6)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
-          <div class="level-feature" onclick="openGrammar(6)"><span class="feat-icon">📖</span> Ngữ pháp tinh thông</div>
+          <div class="level-feature" onclick="openFlashcard(6)"> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(6)"> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(6)"> Ngữ pháp tinh thông</div>
         </div>
       </div>
     </div>
@@ -1503,7 +1502,7 @@ function renderFC(level, idx) {
 }
 
 function openFlashcard(level, idx = 0) {
-  document.getElementById('modalTitle').textContent = `🃏 Flashcard — HSK ${level}`;
+  document.getElementById('modalTitle').textContent = `Flashcard — HSK ${level}`;
   document.getElementById('modalContent').innerHTML = renderFC(level, idx);
   document.getElementById('modalOverlay').classList.add('show');
 }
@@ -1521,7 +1520,7 @@ function openImageRecog(level) {
           <div class="img-question" id="iq${i}">${im.question}</div>
         </div>`).join('')}
     </div>`;
-  document.getElementById('modalTitle').textContent = `🖼️ Nhận biết qua hình ảnh — HSK ${level}`;
+  document.getElementById('modalTitle').textContent = `Nhận biết qua hình ảnh — HSK ${level}`;
   document.getElementById('modalContent').innerHTML = html;
   document.getElementById('modalOverlay').classList.add('show');
 }
@@ -1549,7 +1548,7 @@ function openGrammar(level) {
           <div class="vn">${ex.vn}</div>
         </div>`).join('')}
     `).join('') + `</div>`;
-  document.getElementById('modalTitle').textContent = `📖 ${g.title}`;
+  document.getElementById('modalTitle').textContent = `${g.title}`;
   document.getElementById('modalContent').innerHTML = html;
   document.getElementById('modalOverlay').classList.add('show');
 }
