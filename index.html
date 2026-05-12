@@ -130,7 +130,7 @@ nav {
 .nav-tab.active { color: var(--gold-light); font-weight: 700; }
 .nav-tab.active::after { transform: scaleX(1); }
 
-
+.tab-icon { font-size: 16px; }
 
 /* ── HERO BANNER ── */
 .page-hero {
@@ -372,6 +372,64 @@ nav {
   font-weight: 600;
 }
 
+/* quick words */
+.quick-words {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.quick-label {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.quick-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.quick-chip {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(96,26,17,0.06);
+}
+
+.quick-chip:hover {
+  border-color: var(--red);
+  box-shadow: 0 4px 16px rgba(192,57,43,0.15);
+  transform: translateY(-2px);
+}
+
+.quick-cn {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 22px;
+  color: var(--red-dark);
+  line-height: 1.2;
+}
+
+.quick-py {
+  font-size: 11px; color: var(--red); font-weight: 600;
+  margin-top: 2px;
+}
+
+.quick-vn {
+  font-size: 11px; color: var(--muted);
+  margin-top: 2px;
+}
+
 /* ═══════════════════════════════
    LEVELS PAGE
 ═══════════════════════════════ */
@@ -479,6 +537,7 @@ nav {
   color: var(--red-dark);
 }
 
+.feat-icon { font-size: 16px; flex-shrink: 0; }
 
 /* Flashcard modal */
 .modal-overlay {
@@ -1004,6 +1063,7 @@ nav {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 12px;
 }
+
 /* ── EMPTY STATE ── */
 .nx-empty {
   text-align: center;
@@ -1187,6 +1247,7 @@ nav {
   .exam-levels-grid{grid-template-columns:1fr;}
   .nav-tab{padding:16px 14px;font-size:12px;}
   .img-recog-grid{grid-template-columns:repeat(3,1fr);}
+  .quick-grid{grid-template-columns:repeat(2,1fr);}
 }
 </style>
 </head>
@@ -1204,10 +1265,10 @@ nav {
       </div>
     </a>
     <div class="nav-tabs">
-      <button class="nav-tab active" data-tab="home"> Từ điển</button>
-      <button class="nav-tab" data-tab="levels"> Cấp độ</button>
-      <button class="nav-tab" data-tab="movies"> Phim</button>
-      <button class="nav-tab" data-tab="exam"> Thi HSK</button>
+      <button class="nav-tab active" data-tab="home"><span class="tab-icon">🏮</span> Từ điển</button>
+      <button class="nav-tab" data-tab="levels"><span class="tab-icon">📚</span> Cấp độ</button>
+      <button class="nav-tab" data-tab="movies"><span class="tab-icon">🎬</span> Phim</button>
+      <button class="nav-tab" data-tab="exam"><span class="tab-icon">📝</span> Thi HSK</button>
     </div>
   </div>
 </nav>
@@ -1248,6 +1309,11 @@ nav {
     </div>
   </div>
 
+  <div class="quick-words">
+    <div class="quick-label">Từ thông dụng</div>
+    <div class="quick-grid" id="quickGrid"></div>
+  </div>
+
   <div class="ornament">❧ ✦ 中 ✦ ❧</div>
 </div>
 
@@ -1269,9 +1335,9 @@ nav {
       </div>
       <div class="level-body">
         <div class="level-features">
-          <div class="level-feature" onclick="openFlashcard(1)"> Flashcard từ vựng</div>
-          <div class="level-feature" onclick="openImageRecog(1)"> Nhận biết qua hình ảnh</div>
-          <div class="level-feature" onclick="openGrammar(1)"> Ngữ pháp cơ bản</div>
+          <div class="level-feature" onclick="openFlashcard(1)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(1)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(1)"><span class="feat-icon">📖</span> Ngữ pháp cơ bản</div>
         </div>
       </div>
     </div>
@@ -1284,9 +1350,9 @@ nav {
       </div>
       <div class="level-body">
         <div class="level-features">
-          <div class="level-feature" onclick="openFlashcard(2)"> Flashcard từ vựng</div>
-          <div class="level-feature" onclick="openImageRecog(2)"> Nhận biết qua hình ảnh</div>
-          <div class="level-feature" onclick="openGrammar(2)"> Ngữ pháp sơ cấp</div>
+          <div class="level-feature" onclick="openFlashcard(2)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(2)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(2)"><span class="feat-icon">📖</span> Ngữ pháp sơ cấp</div>
         </div>
       </div>
     </div>
@@ -1299,9 +1365,9 @@ nav {
       </div>
       <div class="level-body">
         <div class="level-features">
-          <div class="level-feature" onclick="openFlashcard(3)"> Flashcard từ vựng</div>
-          <div class="level-feature" onclick="openImageRecog(3)"> Nhận biết qua hình ảnh</div>
-          <div class="level-feature" onclick="openGrammar(3)"> Ngữ pháp trung cấp</div>
+          <div class="level-feature" onclick="openFlashcard(3)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(3)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(3)"><span class="feat-icon">📖</span> Ngữ pháp trung cấp</div>
         </div>
       </div>
     </div>
@@ -1314,9 +1380,9 @@ nav {
       </div>
       <div class="level-body">
         <div class="level-features">
-          <div class="level-feature" onclick="openFlashcard(4)"> Flashcard từ vựng</div>
-          <div class="level-feature" onclick="openImageRecog(4)"> Nhận biết qua hình ảnh</div>
-          <div class="level-feature" onclick="openGrammar(4)"> Ngữ pháp nâng cao</div>
+          <div class="level-feature" onclick="openFlashcard(4)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(4)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(4)"><span class="feat-icon">📖</span> Ngữ pháp nâng cao</div>
         </div>
       </div>
     </div>
@@ -1329,9 +1395,9 @@ nav {
       </div>
       <div class="level-body">
         <div class="level-features">
-          <div class="level-feature" onclick="openFlashcard(5)"> Flashcard từ vựng</div>
-          <div class="level-feature" onclick="openImageRecog(5)"> Nhận biết qua hình ảnh</div>
-          <div class="level-feature" onclick="openGrammar(5)"> Ngữ pháp cao cấp</div>
+          <div class="level-feature" onclick="openFlashcard(5)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(5)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(5)"><span class="feat-icon">📖</span> Ngữ pháp cao cấp</div>
         </div>
       </div>
     </div>
@@ -1344,9 +1410,9 @@ nav {
       </div>
       <div class="level-body">
         <div class="level-features">
-          <div class="level-feature" onclick="openFlashcard(6)"> Flashcard từ vựng</div>
-          <div class="level-feature" onclick="openImageRecog(6)"> Nhận biết qua hình ảnh</div>
-          <div class="level-feature" onclick="openGrammar(6)"> Ngữ pháp tinh thông</div>
+          <div class="level-feature" onclick="openFlashcard(6)"><span class="feat-icon">🃏</span> Flashcard từ vựng</div>
+          <div class="level-feature" onclick="openImageRecog(6)"><span class="feat-icon">🖼️</span> Nhận biết qua hình ảnh</div>
+          <div class="level-feature" onclick="openGrammar(6)"><span class="feat-icon">📖</span> Ngữ pháp tinh thông</div>
         </div>
       </div>
     </div>
@@ -1463,6 +1529,18 @@ const DICT = [
   {cn:'文化',py:'wén huà',vn:'Văn hóa',en:'Culture',tags:['Xã hội','HSK 4']},
   {cn:'历史',py:'lì shǐ',vn:'Lịch sử',en:'History',tags:['Học thuật','HSK 4']},
 ];
+
+const QUICK_WORDS = DICT.slice(0, 12);
+
+/* build quick grid */
+const qg = document.getElementById('quickGrid');
+QUICK_WORDS.forEach(w => {
+  const chip = document.createElement('div');
+  chip.className = 'quick-chip';
+  chip.innerHTML = `<div class="quick-cn">${w.cn}</div><div class="quick-py">${w.py}</div><div class="quick-vn">${w.vn}</div>`;
+  chip.addEventListener('click', () => showResult(w));
+  qg.appendChild(chip);
+});
 
 /* search */
 let searchLang = 'vi';
@@ -1713,7 +1791,7 @@ function renderFC(level, idx) {
 }
 
 function openFlashcard(level, idx = 0) {
-  document.getElementById('modalTitle').textContent = `Flashcard — HSK ${level}`;
+  document.getElementById('modalTitle').textContent = `🃏 Flashcard — HSK ${level}`;
   document.getElementById('modalContent').innerHTML = renderFC(level, idx);
   document.getElementById('modalOverlay').classList.add('show');
 }
@@ -1731,7 +1809,7 @@ function openImageRecog(level) {
           <div class="img-question" id="iq${i}">${im.question}</div>
         </div>`).join('')}
     </div>`;
-  document.getElementById('modalTitle').textContent = `Nhận biết qua hình ảnh — HSK ${level}`;
+  document.getElementById('modalTitle').textContent = `🖼️ Nhận biết qua hình ảnh — HSK ${level}`;
   document.getElementById('modalContent').innerHTML = html;
   document.getElementById('modalOverlay').classList.add('show');
 }
@@ -1759,11 +1837,12 @@ function openGrammar(level) {
           <div class="vn">${ex.vn}</div>
         </div>`).join('')}
     `).join('') + `</div>`;
-  document.getElementById('modalTitle').textContent = `${g.title}`;
+  document.getElementById('modalTitle').textContent = `📖 ${g.title}`;
   document.getElementById('modalContent').innerHTML = html;
   document.getElementById('modalOverlay').classList.add('show');
 }
-════════════════════════════════════════════════════════
+
+/* ════════════════════════════════════════════════════════
    MOVIES DATA — NETFLIX STYLE
    ────────────────────────────────────────────────────────
    HOW TO ADD YOUR OWN CONTENT:
